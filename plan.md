@@ -1,8 +1,9 @@
 # CreatorConnect — Phased Development Plan
 
-Status: phased planning draft. No implementation phase has been authorized or started.
+Status: Phase 0 planning in progress; proposal prepared for review and owner acceptance. Phases 1–9 have not been authorized or started.
 Updated: 11 November 2026.
 Product context: [brand-influencer-product-vision.md](brand-influencer-product-vision.md).
+Phase 0 proposal: [phase-0-pilot-scope.md](phase-0-pilot-scope.md).
 
 ## 1. Direction and confirmed choices
 
@@ -16,7 +17,7 @@ Confirmed direction from the product owner:
 - Launch in Sri Lanka first, with other countries considered later.
 - Start with a private pilot to validate collaboration workflows, then introduce real payments.
 - Start with a simple foundation and evolve toward Redis caching and greater scalability.
-- Do not write application code until the owner explicitly authorizes it. This document is the only requested change.
+- Phase 0 planning is authorized; do not write application code or start Phase 1 until the owner explicitly authorizes it.
 
 CreatorConnect is a working project label; the product brief leaves the final name open.
 
@@ -38,11 +39,11 @@ These are proposals, not additional confirmed requirements:
 | Storage | Supabase Storage for profile images and permitted attachments | Confirm file types, sizes, and retention |
 | Notifications | In-app notifications first; email provider undecided | Pilot communication requirements are known |
 
-No user-count, traffic, hosting-budget, or launch-date targets have been supplied. Set those targets before capacity planning; do not promise scale based only on the chosen stack.
+No user-count, traffic, hosting-budget, or launch-date targets have been confirmed by the owner. The [Phase 0 proposal](phase-0-pilot-scope.md) supplies concrete cohort, budget, and performance recommendations for acceptance; they are not verified capacity or pricing promises. A launch date remains undecided.
 
 ## 3. How phase-by-phase work must proceed
 
-- Current position: Phase 0 is ready for discussion. Phases 1–9 have not started.
+- Current position: Phase 0 planning is in progress, with a parent-reviewed scope/design proposal awaiting owner acceptance. Phases 1–9 have not started.
 - Editing this plan does not authorize application development. Start implementation only when the owner explicitly instructs it.
 - Work within the approved phase. Do not silently add later-phase features or provision later-phase services.
 - At the start of a phase, review its prerequisites and resolve only the decisions needed for that phase. Future decisions may remain open.
@@ -51,12 +52,15 @@ No user-count, traffic, hosting-budget, or launch-date targets have been supplie
 - Follow the owner's authorized scope across phases. If only one phase is authorized, present its completion summary and await instruction before starting another. Explicit authorization covering multiple phases remains valid.
 - Fix issues in already delivered work when necessary for the active phase and record the dependency; propose broader scope changes before undertaking them.
 - Credentials and provider accounts are needed only when their phase requires integration. Do not substitute mock authentication or payment behavior for a completed integration.
+- Reuse the same phase implementation agent where the session remains available; current handoff identity is `/root/phase_worker`, requested GPT-6.1-sol with medium reasoning. Availability across sessions cannot be guaranteed; a successor must read the plan, vision, scope proposal, decisions, and PR history.
+- The parent agent reviews phase changes and resolves findings before creating a PR. The owner alone merges into `main`; agents do not merge on the owner's behalf.
+- This Phase 0 PR explicitly requests acceptance of its final scope/design proposals and D01–D10. The owner's merge records that acceptance, as does an explicit acceptance message; PR creation or silence does not. Record the actual decision or merge reference at the next authorized documentation update. Merge does not authorize a subsequent phase; start later phases only within explicit owner authorization.
 
 ### Roadmap and phase status
 
 | Phase | Outcome | Prerequisite | Status |
 | --- | --- | --- | --- |
-| 0 | Agreed pilot scope and design direction | Existing product vision and owner decisions | Not started |
+| 0 | Agreed pilot scope and design direction | Existing product vision and owner decisions | In progress — reviewed proposal awaiting owner acceptance |
 | 1 | Next.js frontend/backend skeleton and UI foundation | Phase 0 | Not started |
 | 2 | Clerk identity, Supabase data/access foundation, onboarding | Phase 1 and owner's development service configuration | Not started |
 | 3 | Profiles, opportunity discovery, applications and selection | Phase 2 | Not started |
@@ -143,6 +147,8 @@ Next.js application
 **Deliverables:** agreed pilot scope, screen outline, permission/state outline, and a list of remaining decisions assigned to later phases.
 
 **Completion checks:** the owner has resolved or explicitly accepted assumptions required for Phase 1, and the next implementation scope is clear. Implementation still requires the owner's instruction.
+
+**Current evidence:** [phase-0-pilot-scope.md](phase-0-pilot-scope.md) proposes pilot boundaries, visual direction and screens, permission/data-visibility matrix, application/hiring and collaboration transitions, files/notifications, cohort/budget/performance targets, later-phase decisions, and an owner acceptance register (D01–D10). Every proposal remains pending. No Phase 0 completion or Phase 1 authorization is inferred.
 
 ## Phase 1 — Application and UI foundation
 
@@ -399,7 +405,7 @@ Set a realistic pilot workload and latency/error targets before performance test
 
 ## Phase completion record
 
-When implementation is authorized, append a short record for each phase:
+When phase work is authorized, append a short record for each phase:
 
 - Phase and status.
 - Delivered scope and relevant file/schema changes.
@@ -407,7 +413,18 @@ When implementation is authorized, append a short record for each phase:
 - Decisions made, accepted assumptions, unresolved issues, and blockers.
 - Owner-authorized next scope; do not treat a suggested next step as authorization.
 
-No phase has been implemented or verified yet. This planning revision sets the execution order only; it does not create accounts, connect credentials, provision services, or change application code.
+### Phase 0 planning record — 11 November 2026
+
+- Status: **In progress — parent review complete; owner acceptance pending**.
+- Authorized scope: Phase 0 planning only. Prepared [phase-0-pilot-scope.md](phase-0-pilot-scope.md) and updated this plan; the product vision is unchanged.
+- Deliverables: concrete proposed private-pilot scope, UI/navigation direction, minimum fields, permissions/visibility, opportunity/application/collaboration lifecycle, selection/cancellation/revision rules, files/notifications, target operating envelope, numbered acceptance decisions, and deferred decisions assigned to later phases.
+- Checks: read the full plan and vision; checked repository/ancestor `AGENTS.md` locations (none found); parent reviewed the full proposal and plan diff for phase boundaries, lifecycle consistency, member/private-data access, and non-payment wording. Corrected acceptance to follow the owner's PR merge workflow and clarified competing applications during reservation/expiry. Final whitespace, local Markdown link, and UTF-8 checks passed; no application tests apply to this documentation-only change.
+- Decisions: existing confirmed stack and Sri Lanka/private-pilot direction retained. D01–D10 in the scope proposal remain **Pending**; no suggested default has been accepted by inference.
+- Remaining: owner acceptance (by merging this acceptance PR or explicit message) or amendments; record the actual decision/reference at the next authorized documentation update. Phase 1 still requires an explicit instruction. Deferred provider/privacy/support choices are due at the phases stated in the proposal.
+- Workflow: same implementation agent where available; parent reviews before PR; owner alone merges `main`; later phases require owner authorization. Agent handoff identity/configuration is recorded above and in the proposal.
+- Next authorized scope: finish review and revisions of Phase 0 documents only. No application code, accounts, credentials, services, deployment, or later phase is authorized by this record.
+
+No application phase has been implemented or verified. Phase 0 remains incomplete until its acceptance checks are satisfied.
 
 ## Technical references
 
