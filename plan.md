@@ -15,6 +15,7 @@ Confirmed direction from the product owner:
 - Use Clerk for authentication; connect the owner's account and credentials later.
 - Use Supabase for the database.
 - Launch in Sri Lanka first, with other countries considered later.
+- Design the website mobile-first: the owner expects most users to access it on phones. Core workflows must work fully on mobile, with responsive tablet and desktop layouts.
 - Start with a private pilot to validate collaboration workflows, then introduce real payments.
 - Start with a simple foundation and evolve toward Redis caching and greater scalability.
 - Phase 0 was accepted through the owner's merge of PR #1. The owner explicitly authorized Phase 1 on 11 November 2026: “let the subagent know to start work on phase 1”. No later phase is authorized.
@@ -98,6 +99,20 @@ Next.js application
 - Keep UI components separate from authorization, database queries, and payment logic.
 - Treat every browser-supplied field, identifier, and role as untrusted input.
 
+### Mobile-first requirements — apply to every UI phase
+
+The existing responsive requirement is now an explicit mobile-first priority. Most users accessing the service by phone is the owner's audience expectation; validate the device mix during the pilot.
+
+- Design small-screen layouts and core actions first, then adapt them for tablets and desktops. The initial delivery is a responsive website; a native mobile app, installable PWA, and offline functionality are separate future decisions.
+- Support the full brand, influencer, and administrator workflows on phones, including authentication, onboarding, opportunity creation/discovery, applications, discussions, submissions, approval, and later payments. Do not require desktop access for essential actions.
+- Use readable text, visible labels, clear focus states, and touch-friendly controls. Target at least 44 × 44 CSS pixels for primary buttons and icon controls; do not depend on hover-only interactions.
+- Use navigation that fits narrow screens, single-column forms where appropriate, and cards or deliberate responsive alternatives for wide tables. Avoid page-level horizontal scrolling and clipped content.
+- Keep important actions visible without sticky elements covering content. Check virtual-keyboard behavior, form errors, long text, image/file selection, and portrait/landscape layouts.
+- Keep mobile pages lightweight through appropriately sized images, restrained client JavaScript, pagination, and useful loading/retry states on slow or interrupted connections. Offline submission is not assumed.
+- Verify representative layouts at 360 px, 390 px, 768 px, and 1280 px CSS viewport widths. These extend the accepted 360 px/1280 px checks; they do not claim the current implementation has passed them.
+- Before the pilot, test the full journey in Android Chrome and iPhone Safari, using actual devices where available and documenting when testing is limited to emulation. Check zoom, keyboard/focus navigation, and touch interactions as well as visual layout.
+- Each UI phase must record its mobile verification evidence and unresolved issues before being marked complete. Browser/device testing that is unavailable remains an explicit verification gap.
+
 ### Backend — Next.js
 
 - Use Route Handlers for HTTP APIs and external webhooks, and server actions where useful for application forms. Next.js supports custom request handlers within the App Router. [Documentation](https://nextjs.org/docs/app/getting-started/route-handlers).
@@ -160,6 +175,7 @@ Next.js application
 
 - Scaffold the agreed Next.js/TypeScript setup, package lockfile, formatting/linting, and environment-variable documentation without secrets.
 - Create frontend routes/layouts, responsive navigation, design tokens, and accessible shared components.
+- Apply the shared mobile-first requirements to the landing page, navigation, and shared components before extending layouts to larger screens.
 - Establish server-only modules for business services, validation, configuration, and consistent error handling.
 - Build the public landing page and clearly identified placeholder states for later screens. Protected business features remain unavailable until Phase 2.
 - Select a deployment approach before deployment; keep service configuration separate from UI code.
@@ -168,6 +184,8 @@ Next.js application
 **Deliverables:** runnable application skeleton, shared UI foundation, public landing page, and documented configuration requirements.
 
 **Completion checks:** relevant type/lint/build checks pass; the landing page and navigation work on desktop and mobile; no secrets are committed; future features are not presented as implemented.
+
+**Mobile acceptance:** record the shared viewport checks, touch-menu behavior, readable content, and absence of page-level horizontal scrolling. Existing pending browser QA remains pending until verified; this plan update does not complete Phase 1.
 
 ## Phase 2 — Authentication, database and onboarding
 
@@ -238,6 +256,7 @@ Next.js application
 - Configure the agreed host and production service accounts, environment isolation, error monitoring, request/upload limits, and basic abuse protection.
 - Verify database backup/restoration and document basic support and incident procedures before users depend on the service.
 - Run the full journey with separate brand, influencer, and admin accounts; check responsive behavior and accessibility.
+- Prioritize phone-based pilot sessions. Verify the complete mobile journey in Android Chrome and iPhone Safari, including authentication, forms with the virtual keyboard, file selection, messages, and submissions; record device/browser versions and any emulation limitations.
 - Invite the agreed pilot cohort, observe completion/failure points, and collect feedback.
 - Measure latency, error rate, query performance, connection usage, storage, and cost against Phase 0 targets.
 - Prioritize fixes and document the pilot findings and remaining launch risks.
@@ -410,6 +429,7 @@ When phase work is authorized, append a short record for each phase:
 - Phase and status.
 - Delivered scope and relevant file/schema changes.
 - Checks run and their results.
+- For UI changes: mobile viewport/device/browser evidence, touch and accessibility checks, and any outstanding mobile issues.
 - Decisions made, accepted assumptions, unresolved issues, and blockers.
 - Owner-authorized next scope; do not treat a suggested next step as authorization.
 
