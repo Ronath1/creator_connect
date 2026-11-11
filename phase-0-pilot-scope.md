@@ -1,6 +1,6 @@
 # CreatorConnect — Phase 0 pilot scope and design proposal
 
-Status: **proposed; awaiting product-owner acceptance**. Prepared 11 November 2026.
+Status: **accepted through owner merge of PR #1; Phase 0 complete**. Prepared and accepted 11 November 2026.
 
 This document makes Phase 0 reviewable. It does not authorize application code, accounts, purchases, provisioning, deployment, invitations, or Phase 1. Read it with [the development plan](plan.md) and [the product vision](brand-influencer-product-vision.md). The vision remains the long-term product direction; the pilot validates the collaboration journey before payments.
 
@@ -8,7 +8,7 @@ This document makes Phase 0 reviewable. It does not authorize application code, 
 
 The owner has confirmed Next.js for frontend and backend, Clerk for identity, Supabase for application data, Sri Lanka as the first market, a private pilot before real payments, and a simple foundation that can evolve toward Redis when measurements justify it. Provider credentials will be connected when needed. CreatorConnect remains a working name.
 
-Phase 0 planning is authorized. Every scope rule, number, design choice, and operational default below is a **recommendation awaiting acceptance**, unless explicitly identified above as confirmed. This PR asks the owner to accept D01–D10 and the final scope/design proposal, or request amendments. Under the owner's review-and-merge workflow, their merge of this explicitly scoped acceptance PR records acceptance of its final proposals; creating a PR or receiving no response does not. Record the actual owner decision or merge reference in the register and plan at the next authorized documentation update. Merge does not authorize Phase 1.
+The owner accepted D01–D10 and the final scope/design proposal by merging [PR #1](https://github.com/Ronath1/creator_connect/pull/1) on 11 November 2026 at 13:44:08 UTC, merge commit `560fd03b70c9aa2cda39211d5eccca1c68aae2c6`. Choices originally described as recommendations below are now accepted planning defaults, not evidence of implemented features or verified provider performance/cost. Merge itself did not authorize Phase 1; the owner's separate instruction to start Phase 1 is recorded in [the plan](plan.md). No later phase is authorized.
 
 ## 2. Proposed pilot boundary
 
@@ -174,20 +174,20 @@ Document test tools, devices, region, dataset, and results with later phase evid
 
 ## 9. Owner acceptance register
 
-All rows start **Pending**. This PR requests acceptance of D01–D10 as a set, subject to any owner-requested amendments. The owner's merge of this acceptance PR records acceptance of the final proposals; an explicit acceptance message also suffices. Record the actual decision/date/source or merge reference at the next authorized documentation update. Silence, PR creation, and recommendations are not acceptance. If one choice changes, update dependent screens/rules before declaring Phase 0 complete.
+All rows were accepted through the owner's merge of [PR #1](https://github.com/Ronath1/creator_connect/pull/1), merge commit `560fd03b70c9aa2cda39211d5eccca1c68aae2c6`, on 11 November 2026 at 13:44:08 UTC. The register records that actual decision, not an inference from silence. Later amendments must update dependent screens/rules and record owner approval.
 
 | ID | Decision to accept or amend | Proposed default | Status |
 | --- | --- | --- | --- |
-| D01 | UI foundation and language | TypeScript, Tailwind, system fonts, teal/slate workspace direction, English UI, responsive accessible layout | Pending |
-| D02 | Audience and roles | Invite-only Sri Lanka; 5 brands/20 influencers/up to 2 admins; one marketplace role/account; no teams or role switch | Pending |
-| D03 | Pilot operating envelope | Four-week observation, stated activity/feedback goals, LKR 15,000/month service ceiling | Pending |
-| D04 | Marketplace visibility and profiles | Member-only profiles/opportunities; required fields and self-reported social links from section 4 | Pending |
-| D05 | Applications and hiring | One application/influencer/opportunity; one slot; selection reservation, reopening and 7-day selection window rules | Pending |
-| D06 | Agreement and delivery | Both confirm versioned terms; 7-day agreement window; one revision/item; explicit brand approval; amendment/cancellation rules | Pending |
-| D07 | Pilot compensation boundary | LKR informational budget; no in-platform payment or financial status; separately decide any external compensation arrangement | Pending |
-| D08 | Files and notifications | Listed image/PDF limits, private storage, upload scanning decision before uploads; in-app polling/events, no email | Pending |
-| D09 | Data and support operations | Case-related audited admin access, proposed retention, report/cancellation handling; nominate support owner and approve privacy/deletion process before invitations | Pending |
-| D10 | Quality and workload | Targets and measurement scope from section 8 | Pending |
+| D01 | UI foundation and language | TypeScript, Tailwind, system fonts, teal/slate workspace direction, English UI, responsive accessible layout | Accepted — PR #1 |
+| D02 | Audience and roles | Invite-only Sri Lanka; 5 brands/20 influencers/up to 2 admins; one marketplace role/account; no teams or role switch | Accepted — PR #1 |
+| D03 | Pilot operating envelope | Four-week observation, stated activity/feedback goals, LKR 15,000/month service ceiling | Accepted — PR #1 |
+| D04 | Marketplace visibility and profiles | Member-only profiles/opportunities; required fields and self-reported social links from section 4 | Accepted — PR #1 |
+| D05 | Applications and hiring | One application/influencer/opportunity; one slot; selection reservation, reopening and 7-day selection window rules | Accepted — PR #1 |
+| D06 | Agreement and delivery | Both confirm versioned terms; 7-day agreement window; one revision/item; explicit brand approval; amendment/cancellation rules | Accepted — PR #1 |
+| D07 | Pilot compensation boundary | LKR informational budget; no in-platform payment or financial status; separately decide any external compensation arrangement | Accepted — PR #1 |
+| D08 | Files and notifications | Listed image/PDF limits, private storage, upload scanning decision before uploads; in-app polling/events, no email | Accepted — PR #1 |
+| D09 | Data and support operations | Case-related audited admin access, proposed retention, report/cancellation handling; nominate support owner and approve privacy/deletion process before invitations | Accepted — PR #1 |
+| D10 | Quality and workload | Targets and measurement scope from section 8 | Accepted — PR #1 |
 
 Phase 1 is sufficiently defined for acceptance once D01–D10 are accepted or explicit deferrals are recorded that do not change the Phase 1 design. Hosting, scanning provider, privacy wording, and support-contact identity can remain later-phase decisions as below. Owner acceptance closes Phase 0 only when the agreed pilot scope and screens/permissions/states are coherent. A separate owner instruction must then authorize Phase 1.
 
@@ -212,4 +212,4 @@ The owner's requested workflow is to reuse the same phase implementation agent w
 
 The implementation agent works within the authorized phase. The parent agent reviews the proposed changes before creating a PR, records findings, and requests corrections as needed. The owner alone merges changes into `main`; their merge of this acceptance PR records agreement to its final Phase 0 proposals. Neither a phase proposal, PR creation, nor merge authorizes a subsequent phase; start it only under the owner's explicit instruction. No application code or service provisioning is part of this Phase 0 delivery.
 
-Planning validation performed: read the full plan and product vision; checked for applicable `AGENTS.md` files in the repository and ancestor directories (none found); parent reviewed proposed screens against phase boundaries, participant visibility, hiring capacity, state transitions, and non-payment constraints. Review corrections aligned acceptance with the owner's PR merge workflow and clarified competing applications during reservation/expiry. Whitespace, local Markdown link, and UTF-8 checks passed. Application checks are not applicable because no application code changes are authorized. Parent review is complete; owner acceptance remains pending.
+Planning validation performed: read the full plan and product vision; checked for applicable `AGENTS.md` files in the repository and ancestor directories (none found); parent reviewed proposed screens against phase boundaries, participant visibility, hiring capacity, state transitions, and non-payment constraints. Review corrections aligned acceptance with the owner's PR merge workflow and clarified competing applications during reservation/expiry. Whitespace, local Markdown link, and UTF-8 checks passed. Application checks were not applicable to the Phase 0 documentation-only PR. Parent review and owner acceptance are complete. Phase 1 was subsequently authorized separately; its implementation/checks are recorded in the plan.

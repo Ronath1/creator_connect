@@ -1,6 +1,6 @@
 # CreatorConnect — Phased Development Plan
 
-Status: Phase 0 planning in progress; proposal prepared for review and owner acceptance. Phases 1–9 have not been authorized or started.
+Status: Phase 0 accepted and complete. Phase 1 implementation and executable checks delivered; In progress pending browser verification. Phases 2–9 have not been authorized or started.
 Updated: 11 November 2026.
 Product context: [brand-influencer-product-vision.md](brand-influencer-product-vision.md).
 Phase 0 proposal: [phase-0-pilot-scope.md](phase-0-pilot-scope.md).
@@ -17,7 +17,7 @@ Confirmed direction from the product owner:
 - Launch in Sri Lanka first, with other countries considered later.
 - Start with a private pilot to validate collaboration workflows, then introduce real payments.
 - Start with a simple foundation and evolve toward Redis caching and greater scalability.
-- Phase 0 planning is authorized; do not write application code or start Phase 1 until the owner explicitly authorizes it.
+- Phase 0 was accepted through the owner's merge of PR #1. The owner explicitly authorized Phase 1 on 11 November 2026: “let the subagent know to start work on phase 1”. No later phase is authorized.
 
 CreatorConnect is a working project label; the product brief leaves the final name open.
 
@@ -39,11 +39,11 @@ These are proposals, not additional confirmed requirements:
 | Storage | Supabase Storage for profile images and permitted attachments | Confirm file types, sizes, and retention |
 | Notifications | In-app notifications first; email provider undecided | Pilot communication requirements are known |
 
-No user-count, traffic, hosting-budget, or launch-date targets have been confirmed by the owner. The [Phase 0 proposal](phase-0-pilot-scope.md) supplies concrete cohort, budget, and performance recommendations for acceptance; they are not verified capacity or pricing promises. A launch date remains undecided.
+The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and performance planning targets accepted through PR #1. They are not verified capacity or pricing promises. A launch date remains undecided.
 
 ## 3. How phase-by-phase work must proceed
 
-- Current position: Phase 0 planning is in progress, with a parent-reviewed scope/design proposal awaiting owner acceptance. Phases 1–9 have not started.
+- Current position: Phase 0 is accepted and complete. Phase 1 implementation is authorized and in progress; Phases 2–9 have not started.
 - Editing this plan does not authorize application development. Start implementation only when the owner explicitly instructs it.
 - Work within the approved phase. Do not silently add later-phase features or provision later-phase services.
 - At the start of a phase, review its prerequisites and resolve only the decisions needed for that phase. Future decisions may remain open.
@@ -54,14 +54,14 @@ No user-count, traffic, hosting-budget, or launch-date targets have been confirm
 - Credentials and provider accounts are needed only when their phase requires integration. Do not substitute mock authentication or payment behavior for a completed integration.
 - Reuse the same phase implementation agent where the session remains available; current handoff identity is `/root/phase_worker`, requested GPT-6.1-sol with medium reasoning. Availability across sessions cannot be guaranteed; a successor must read the plan, vision, scope proposal, decisions, and PR history.
 - The parent agent reviews phase changes and resolves findings before creating a PR. The owner alone merges into `main`; agents do not merge on the owner's behalf.
-- This Phase 0 PR explicitly requests acceptance of its final scope/design proposals and D01–D10. The owner's merge records that acceptance, as does an explicit acceptance message; PR creation or silence does not. Record the actual decision or merge reference at the next authorized documentation update. Merge does not authorize a subsequent phase; start later phases only within explicit owner authorization.
+- The owner merged Phase 0 acceptance PR #1, accepting its final scope/design proposals and D01–D10. A PR merge does not authorize a subsequent phase; start later phases only within explicit owner authorization. Phase 1 has a separate explicit instruction recorded above.
 
 ### Roadmap and phase status
 
 | Phase | Outcome | Prerequisite | Status |
 | --- | --- | --- | --- |
-| 0 | Agreed pilot scope and design direction | Existing product vision and owner decisions | In progress — reviewed proposal awaiting owner acceptance |
-| 1 | Next.js frontend/backend skeleton and UI foundation | Phase 0 | Not started |
+| 0 | Agreed pilot scope and design direction | Existing product vision and owner decisions | Complete — accepted via owner merge of PR #1 |
+| 1 | Next.js frontend/backend skeleton and UI foundation | Phase 0 | In progress — implementation/executable checks reviewed; browser QA unavailable |
 | 2 | Clerk identity, Supabase data/access foundation, onboarding | Phase 1 and owner's development service configuration | Not started |
 | 3 | Profiles, opportunity discovery, applications and selection | Phase 2 | Not started |
 | 4 | Agreed work, discussions, submissions, approvals and admin support | Phase 3 | Not started |
@@ -148,7 +148,7 @@ Next.js application
 
 **Completion checks:** the owner has resolved or explicitly accepted assumptions required for Phase 1, and the next implementation scope is clear. Implementation still requires the owner's instruction.
 
-**Current evidence:** [phase-0-pilot-scope.md](phase-0-pilot-scope.md) proposes pilot boundaries, visual direction and screens, permission/data-visibility matrix, application/hiring and collaboration transitions, files/notifications, cohort/budget/performance targets, later-phase decisions, and an owner acceptance register (D01–D10). Every proposal remains pending. No Phase 0 completion or Phase 1 authorization is inferred.
+**Acceptance evidence:** the owner merged [PR #1](https://github.com/Ronath1/creator_connect/pull/1) on 11 November 2026 at 13:44:08 UTC, merge commit `560fd03b70c9aa2cda39211d5eccca1c68aae2c6`. This accepts the final [pilot scope/design](phase-0-pilot-scope.md), including D01–D10, and completes Phase 0. The owner's separate Phase 1 instruction is recorded above.
 
 ## Phase 1 — Application and UI foundation
 
@@ -413,7 +413,7 @@ When phase work is authorized, append a short record for each phase:
 - Decisions made, accepted assumptions, unresolved issues, and blockers.
 - Owner-authorized next scope; do not treat a suggested next step as authorization.
 
-### Phase 0 planning record — 11 November 2026
+### Phase 0 initial planning record — 11 November 2026 (superseded by acceptance below)
 
 - Status: **In progress — parent review complete; owner acceptance pending**.
 - Authorized scope: Phase 0 planning only. Prepared [phase-0-pilot-scope.md](phase-0-pilot-scope.md) and updated this plan; the product vision is unchanged.
@@ -424,7 +424,20 @@ When phase work is authorized, append a short record for each phase:
 - Workflow: same implementation agent where available; parent reviews before PR; owner alone merges `main`; later phases require owner authorization. Agent handoff identity/configuration is recorded above and in the proposal.
 - Next authorized scope: finish review and revisions of Phase 0 documents only. No application code, accounts, credentials, services, deployment, or later phase is authorized by this record.
 
-No application phase has been implemented or verified. Phase 0 remains incomplete until its acceptance checks are satisfied.
+### Phase 0 acceptance record — 11 November 2026
+
+- Status: **Complete**. Owner merged [PR #1](https://github.com/Ronath1/creator_connect/pull/1) at 13:44:08 UTC; merge commit `560fd03b70c9aa2cda39211d5eccca1c68aae2c6`.
+- Accepted scope: final pilot proposal and D01–D10, with remaining service/operational decisions deferred to their documented phases.
+- Separate next-scope authorization: owner explicitly instructed “let the subagent know to start work on phase 1”. Same implementation agent resumed. No Phase 2 authorization.
+
+### Phase 1 implementation record — 11 November 2026
+
+- Status: **In progress**. Application/UI foundation delivered; parent source review and executable checks complete. Desktop/mobile browser verification is unavailable in the current environment and is not claimed complete.
+- Delivered scope: root Next.js/TypeScript/Tailwind app, landing page and responsive shared navigation/tokens/components; allowlisted unavailable routes; error/loading/404 states; server-only configuration, bounded validation, safe errors, and documented service boundary; README and environment example without credentials.
+- Scope exclusions: no Clerk/Supabase integration, business forms/actions, stored users/records, payments, service provisioning, or deployment. The public unavailable screens do not grant access to protected features.
+- Validation: parent ran successful clean install, lint (zero warnings), formatting, strict types, and production build (15 static pages). Production HTTP checks passed for landing/11 future routes, icon and unknown/nested/prototype-like 404 paths; internal anchor targets resolve and there are no forms. Parent review corrections addressed small-text contrast, illustration semantics, PostCSS export and error-page navigation. See [Phase 1 verification](docs/phase-1-verification.md) for evidence and limitations.
+- Dependency limitations: production audit found zero vulnerabilities; eight moderate development lint-chain advisories remain upstream. Compatible ESLint 9 is deprecated; ESLint 10 currently conflicts with Next lint-plugin peers. No forced major override or unrelated framework downgrade was applied.
+- Remaining: actual 360 px/1280 px layout, keyboard focus, and mobile-menu browser verification before declaring Phase 1 Complete. Parent reported no browser surfaces and `iab` creation failure; source/HTTP review does not replace visual interaction evidence. Owner alone merges the implementation PR. Phase 2 still requires explicit owner instruction.
 
 ## Technical references
 
