@@ -1,0 +1,7 @@
+node_modules
+.next
+package-lock.json
+next-env.d.ts
+plan.md
+phase-0-pilot-scope.md
+brand-influencer-product-vision.md
