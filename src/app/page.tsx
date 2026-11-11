@@ -258,8 +258,8 @@ export default function Home() {
               and creators to learn what makes collaboration work in practice.
             </p>
             <p>
-              Already invited? Sign-in will be available once account access is
-              ready. Invitations are managed directly by the pilot team.
+              Already invited? Sign in to your account. Marketplace access and
+              invitations are managed directly by the pilot team.
             </p>
             <ActionLink href="/sign-in">
               Sign in <Arrow />

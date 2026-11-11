@@ -5,24 +5,6 @@ export const site = {
 } as const;
 
 export const futureFeatures = {
-  "sign-in": {
-    title: "Sign in",
-    phase: 2,
-    description:
-      "Secure sign-in and invitation access are being prepared. There is no account access in this preview.",
-  },
-  onboarding: {
-    title: "Your profile starts here",
-    phase: 2,
-    description:
-      "Invited members will set up a brand or creator profile after secure sign-in is available.",
-  },
-  dashboard: {
-    title: "A clear view of your next step",
-    phase: 2,
-    description:
-      "Your personal workspace will be available after sign-in and onboarding. No account data is shown here.",
-  },
   opportunities: {
     title: "Find your next collaboration",
     phase: 3,
@@ -52,12 +34,6 @@ export const futureFeatures = {
     phase: 4,
     description:
       "Members will receive in-app updates about their own applications and collaborations. Notifications are not active yet.",
-  },
-  profile: {
-    title: "Introduce your work",
-    phase: 2,
-    description:
-      "Invited members will create and edit their profiles after onboarding is available.",
   },
   reports: {
     title: "Help with your collaboration",

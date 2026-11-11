@@ -8,7 +8,7 @@ This document makes Phase 0 reviewable. It does not authorize application code, 
 
 The owner has confirmed Next.js for frontend and backend, Clerk for identity, Supabase for application data, Sri Lanka as the first market, a private pilot before real payments, and a simple foundation that can evolve toward Redis when measurements justify it. Provider credentials will be connected when needed. CreatorConnect remains a working name.
 
-The owner accepted D01–D10 and the final scope/design proposal by merging [PR #1](https://github.com/Ronath1/creator_connect/pull/1) on 11 November 2026 at 13:44:08 UTC, merge commit `560fd03b70c9aa2cda39211d5eccca1c68aae2c6`. Choices originally described as recommendations below are now accepted planning defaults, not evidence of implemented features or verified provider performance/cost. Merge itself did not authorize Phase 1; the owner's separate instruction to start Phase 1 is recorded in [the plan](plan.md). No later phase is authorized.
+The owner accepted D01–D10 and the final scope/design proposal by merging [PR #1](https://github.com/Ronath1/creator_connect/pull/1) on 11 November 2026 at 13:44:08 UTC, merge commit `560fd03b70c9aa2cda39211d5eccca1c68aae2c6`. Choices originally described as recommendations below are now accepted planning defaults, not evidence of implemented features or verified provider performance/cost. Merge itself did not authorize implementation; the owner's separate Phase 1 and Phase 2 instructions are recorded in [the plan](plan.md). No Phase 3 or later work is authorized.
 
 ## 2. Proposed pilot boundary
 

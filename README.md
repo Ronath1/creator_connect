@@ -1,8 +1,8 @@
 # CreatorConnect
 
-A Next.js application and UI foundation for the Sri Lanka private pilot. Phase 1 includes a responsive landing page, shared design tokens/components, navigation, safe error/loading/not-found states, and explicit unavailable screens for future features.
+A Next.js application for the Sri Lanka private pilot. The Phase 1 foundation includes the public introduction, shared design tokens/navigation and safe route states. The Phase 2 source milestone adds real Clerk/Supabase integration wiring, controlled membership, atomic profile onboarding, and member dashboard/profile shells.
 
-There are no active accounts, marketplace records, business actions, uploads, or payments. Sign-in leads to an explanation, not a simulated login. See [the plan](plan.md) and [accepted pilot scope](phase-0-pilot-scope.md) for phase boundaries.
+Account flows require the owner's configured development services and an approved membership. They fail closed when configuration is absent. No marketplace opportunities, applications, uploads or payments are implemented. Source/local tests do not establish hosted integration success. See [the plan](plan.md), [accepted pilot scope](phase-0-pilot-scope.md), and [Phase 2 setup](docs/phase-2-setup.md).
 
 ## Run locally
 
@@ -13,17 +13,20 @@ npm ci
 npm run dev
 ```
 
-Open the printed local URL, normally `http://127.0.0.1:3000`. No service accounts or environment variables are required. Copy `.env.example` to the ignored `.env.local` only if you want to set `APP_URL` for metadata. That value must be a plain HTTPS origin, or HTTP for localhost. Never put credentials into tracked files.
+Open the printed local URL, normally `http://localhost:3000`. The public introduction needs no credentials. For real account flows, use the owner's intended development Clerk/Supabase configuration in ignored `.env.local`, following the setup guide. `APP_URL` is optional for metadata and accepts a plain HTTPS origin or HTTP localhost origin. Never put credentials into tracked files. Restart/rebuild when public configuration changes.
 
 ```sh
 npm run format:check
 npm run lint
 npm run typecheck
+npm test
 npm run build
 npm start
 ```
 
 `build` does not replace the separate lint/type checks. `start` runs the production build locally. The development and production scripts bind to loopback intentionally; deployment is deferred and no host has been selected. No app data is stored in process memory or local files.
+
+Use the `localhost` hostname consistently. With the current Next/Clerk combination, binding only to `127.0.0.1` caused Clerk's local request rewrite (normalized by Next to `localhost`) to fail with a socket hang-up. Binding to `localhost` resolved the parent-observed failure while retaining the real authentication middleware.
 
 ## Source layout
 
@@ -39,24 +42,24 @@ npm start
 | `src/server/services`      | Documented boundary for later authorized domain services                                     |
 | `src/instrumentation.ts`   | Minimal structured server-error hook, without request URLs, input, headers or error contents |
 
-The UI uses server components except the error retry boundary. Native navigation, anchors, and a labelled mobile disclosure menu work without application JavaScript. There are no remote fonts, third-party scripts, stock-photo downloads, analytics, or network data calls. The landing illustration uses HTML/CSS and is explanatory rather than a representation of real marketplace activity.
+Most content uses server components. The onboarding form uses client state for submitted errors/pending status and optional social rows; account pages use Clerk's real components. Native navigation and the labelled mobile disclosure menu work without application JavaScript. No remote fonts, stock photos or analytics are added. Configured account flows call Clerk and the selected Supabase project with the current user's token. The HTML/CSS landing illustration is explanatory, not real marketplace activity.
 
 Design tokens follow the accepted slate/teal direction. Components provide visible keyboard focus, a skip link, descriptive landmarks/headings, readable status labels, and reduced-motion support. The CSS adapts from 360 px mobile to desktop; actual browser visual verification must be recorded separately from static review.
 
 ## Environment and later integrations
 
-| Variable / service | Phase 1 behavior                                            | Later configuration                                                                    |
-| ------------------ | ----------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `APP_URL`          | Optional server-only metadata origin, defaults to localhost | Set to chosen deployment origin before release                                         |
-| Clerk              | Not installed or connected                                  | Phase 2: owner project configuration, sessions, invite membership and authorization    |
-| Supabase           | Not installed or connected                                  | Phase 2: migrations, user-scoped access, RLS; storage only with agreed controls        |
-| Monitoring         | No external monitoring provider                             | Before pilot release: owner-approved tooling and privacy-safe operational measurements |
-| Payments           | Unavailable; informational pilot language                   | Phase 6 after provider/business-rule approval                                          |
+| Variable / service | Current source behavior                                                 | Remaining configuration                                                                |
+| ------------------ | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `APP_URL`          | Optional server-only metadata origin, defaults to localhost             | Set to chosen deployment origin before release                                         |
+| Clerk              | Real SDK/provider/proxy and auth pages, gated by complete configuration | Verify owner's dev application, session/recovery flows and native Supabase integration |
+| Supabase           | User-token client, migration/RLS and onboarding RPC source              | Apply/test only in approved dev target, generate DB types; storage remains disabled    |
+| Monitoring         | No external monitoring provider                                         | Before pilot release: owner-approved tooling and privacy-safe operational measurements |
+| Payments           | Unavailable; informational pilot language                               | Phase 6 after provider/business-rule approval                                          |
 
 Future service configuration must stay server-only unless the provider explicitly defines a publishable browser value. Do not add mock account flows while credentials are unavailable. Authentication, membership and server/database policies must be verified before any real users or private records enter the app. The placeholder routes are public descriptions and expose no privileged operation or private data.
 
 ## Verification and handoff
 
-See [Phase 1 verification](docs/phase-1-verification.md) for executed checks and limitations. No services are provisioned and no deployment is included. Hosting choice, real integration, and later phases require the owner's authorization. The parent reviews changes before a PR; the owner alone merges `main`.
+See [Phase 1 verification](docs/phase-1-verification.md) and [Phase 2 verification](docs/phase-2-verification.md) for executed checks and limitations. Deployment is not included. Phase 1 retains its browser QA gap; Phase 2 remains in progress until real integration/storage and mobile checks pass. The parent reviews every milestone before a PR; the owner alone merges `main`.
 
 Current framework setup was checked against the official [Next.js installation guide](https://nextjs.org/docs/app/getting-started/installation) and [Tailwind Next.js guide](https://tailwindcss.com/docs/installation/framework-guides/nextjs). Installed versions and the lockfile are the reproducible implementation record.
