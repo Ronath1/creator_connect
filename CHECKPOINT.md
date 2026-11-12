@@ -4,7 +4,7 @@ Status: owner resumed with “ok continue the work”. The image milestone has p
 
 ## Branch and review workflow
 
-- Branch: `feat/phase-2-profile-images`, based on unmerged authentication PR [#3](https://github.com/Ronath1/creator_connect/pull/3), which depends on Phase 1 PR [#2](https://github.com/Ronath1/creator_connect/pull/2). No image PR has been opened yet.
+- Branch: `feat/phase-2-profile-images`, delivered in ready-for-review image PR [#4](https://github.com/Ronath1/creator_connect/pull/4). Its base is unmerged authentication PR [#3](https://github.com/Ronath1/creator_connect/pull/3), which depends on Phase 1 PR [#2](https://github.com/Ronath1/creator_connect/pull/2). Review/merge in that order and retarget as appropriate.
 - Reuse `/root/phase_worker` (GPT-6.1-sol, medium) where available.
 - Parent reviews/corrects each milestone before its PR; the owner alone merges `main`.
 - Historical pause: the owner paused work and checkpoint `ca60002` was saved. That pause was explicitly revoked by the later resume; it is not an active instruction.
@@ -30,7 +30,7 @@ Status: owner resumed with “ok continue the work”. The image milestone has p
 
 ## Remaining / handoff
 
-- Parent completes final record review, commits/pushes and opens the Ready-for-review image milestone PR stacked on #3; executable checks are complete.
+- Parent review, executable checks and push are complete; image PR #4 is open for owner review. The local development server is stopped.
 - Owner manual credential handoff: fresh signup/new password and password-reset verification. Account/security/device controls were visible, but no credential was created or changed.
 - Screenshot capture timed out through both available APIs. No screenshot-based visual review, physical Android/iPhone, virtual keyboard or zoom test is claimed. Record these as outstanding limits.
 - Keep Phase 2 In progress until its remaining checks are completed or explicitly scoped by the owner. Do not begin Phase 3 or merge on the owner's behalf.
