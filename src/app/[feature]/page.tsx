@@ -43,8 +43,8 @@ export default async function FeaturePage({
       <div className="notice">
         <strong>Private pilot in preparation</strong>
         <p>
-          This is an early preview. There are no active accounts, applications,
-          or payments here.
+          Marketplace features are still being prepared. Applications and
+          payments are not available here.
         </p>
       </div>
       <ActionLink href="/">

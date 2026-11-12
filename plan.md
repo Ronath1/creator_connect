@@ -1,7 +1,7 @@
 # CreatorConnect — Phased Development Plan
 
-Status: Phase 0 accepted and complete. Phase 1 implementation and executable checks delivered; In progress pending browser verification. Phases 2–9 have not been authorized or started.
-Updated: 11 November 2026.
+Status: Phase 0 accepted and complete. Phase 1 implementation/executable checks delivered, browser verification pending. Phase 2 explicitly authorized and In progress; Phases 3–9 have not been authorized or started.
+Updated: 12 November 2026.
 Product context: [brand-influencer-product-vision.md](brand-influencer-product-vision.md).
 Phase 0 proposal: [phase-0-pilot-scope.md](phase-0-pilot-scope.md).
 
@@ -18,7 +18,7 @@ Confirmed direction from the product owner:
 - Design the website mobile-first: the owner expects most users to access it on phones. Core workflows must work fully on mobile, with responsive tablet and desktop layouts.
 - Start with a private pilot to validate collaboration workflows, then introduce real payments.
 - Start with a simple foundation and evolve toward Redis caching and greater scalability.
-- Phase 0 was accepted through the owner's merge of PR #1. The owner explicitly authorized Phase 1 on 11 November 2026: “let the subagent know to start work on phase 1”. No later phase is authorized.
+- Phase 0 was accepted through the owner's merge of PR #1. The owner explicitly authorized Phases 1 and 2 separately on 11 November 2026, then directed Phase 2 development to continue while configuring services. No Phase 3 or later work is authorized.
 
 CreatorConnect is a working project label; the product brief leaves the final name open.
 
@@ -44,7 +44,7 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 
 ## 3. How phase-by-phase work must proceed
 
-- Current position: Phase 0 is accepted and complete. Phase 1 implementation is authorized and in progress; Phases 2–9 have not started.
+- Current position: Phase 0 is accepted and complete. Phase 1 retains an explicit browser QA gap. The owner separately authorized starting Phase 2 with that gap still open; Phase 2 integration-source/local-test work is in progress. Phases 3–9 have not started.
 - Editing this plan does not authorize application development. Start implementation only when the owner explicitly instructs it.
 - Work within the approved phase. Do not silently add later-phase features or provision later-phase services.
 - At the start of a phase, review its prerequisites and resolve only the decisions needed for that phase. Future decisions may remain open.
@@ -62,8 +62,8 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 | Phase | Outcome | Prerequisite | Status |
 | --- | --- | --- | --- |
 | 0 | Agreed pilot scope and design direction | Existing product vision and owner decisions | Complete — accepted via owner merge of PR #1 |
-| 1 | Next.js frontend/backend skeleton and UI foundation | Phase 0 | In progress — implementation/executable checks reviewed; browser QA unavailable |
-| 2 | Clerk identity, Supabase data/access foundation, onboarding | Phase 1 and owner's development service configuration | Not started |
+| 1 | Next.js frontend/backend skeleton and UI foundation | Phase 0 | In progress — implementation/executable checks reviewed; browser QA resumed 12 November |
+| 2 | Clerk identity, Supabase data/access foundation, onboarding | Phase 1 and owner's development service configuration | In progress — hosted identity/onboarding verified; storage and browser/mobile checks underway |
 | 3 | Profiles, opportunity discovery, applications and selection | Phase 2 | Not started |
 | 4 | Agreed work, discussions, submissions, approvals and admin support | Phase 3 | Not started |
 | 5 | Verified Sri Lankan private pilot and feedback | Phase 4 and deployment readiness | Not started |
@@ -192,6 +192,8 @@ The existing responsive requirement is now an explicit mobile-first priority. Mo
 **Goal:** establish trusted user identity and protected application data before marketplace features.
 
 **Prerequisite:** Phase 1 complete; owner's Clerk and Supabase development configuration available when needed.
+
+**Recorded dependency exception:** the owner explicitly authorized starting Phase 2 while Phase 1 browser QA is pending, and asked source development to continue while they configure the services. This does not mark Phase 1 complete. Phase 2 remains In progress until real integration and mobile verification pass. PR #2 remains unmerged; the current milestone is stacked on its reviewed source.
 
 **Work:**
 
@@ -457,7 +459,30 @@ When phase work is authorized, append a short record for each phase:
 - Scope exclusions: no Clerk/Supabase integration, business forms/actions, stored users/records, payments, service provisioning, or deployment. The public unavailable screens do not grant access to protected features.
 - Validation: parent ran successful clean install, lint (zero warnings), formatting, strict types, and production build (15 static pages). Production HTTP checks passed for landing/11 future routes, icon and unknown/nested/prototype-like 404 paths; internal anchor targets resolve and there are no forms. Parent review corrections addressed small-text contrast, illustration semantics, PostCSS export and error-page navigation. See [Phase 1 verification](docs/phase-1-verification.md) for evidence and limitations.
 - Dependency limitations: production audit found zero vulnerabilities; eight moderate development lint-chain advisories remain upstream. Compatible ESLint 9 is deprecated; ESLint 10 currently conflicts with Next lint-plugin peers. No forced major override or unrelated framework downgrade was applied.
-- Remaining: actual 360 px/1280 px layout, keyboard focus, and mobile-menu browser verification before declaring Phase 1 Complete. Parent reported no browser surfaces and `iab` creation failure; source/HTTP review does not replace visual interaction evidence. Owner alone merges the implementation PR. Phase 2 still requires explicit owner instruction.
+- Remaining: actual 360/390/768/1280 px layout, keyboard focus, and mobile-menu browser verification before declaring Phase 1 Complete. Parent reported no browser surfaces and `iab` creation failure; source/HTTP review does not replace visual interaction evidence. Owner alone merges the implementation PR. Phase 2 was subsequently authorized separately with this gap still open, as recorded below.
+
+### Phase 2 integration-source milestone — 11 November 2026
+
+- Status: **In progress**. Owner explicitly authorized Phase 2 and continuation without keys during configuration. Same implementation agent resumed; parent must review every delivered milestone before a PR, and the owner alone merges `main`.
+- Base/dependency: `feat/phase-2-auth-onboarding` is stacked on the unmerged Phase 1 source (PR #2), including the owner's mobile-first plan update. Phase 1 browser checks remain pending; this is an authorized sequencing exception, not a completion claim.
+- Source delivered: real Clerk SDK/provider/proxy/sign-in/sign-up controls; current-session Supabase client; controlled membership gates; own-profile services and idempotent security-invoker onboarding RPCs; mobile-first form/dashboard/profile source; fail-closed missing-configuration states. No mock authentication or service-role key is used.
+- Database/testing: CLI-generated versioned migration with explicit grants/RLS and ownership/role/status checks; parent ran all 16 isolated SQL/RLS and form-validation tests successfully. Parent identified the owner's dedicated development project, applied the reviewed migration, confirmed all four tables have RLS, received no security-advisor findings, and generated real database types now used by the client/services.
+- Validation: final clean install passed (406 packages, about 46 seconds), then all 16 tests, lint (zero warnings), formatting, strict types and production build passed under parent execution with development configuration. The build has 11 static pages plus dynamic auth/member routes. The hosted migration ledger was aligned to the CLI-created local version without changing schema; generated types and security advisors passed. Production dependency audit: zero findings.
+- Runtime/review corrections: parent traced the configured public-page socket hang-up to Next/Clerk loopback hostname normalization and self-rewrite while listening only on `127.0.0.1`. Listening on `localhost` returned 200 immediately; scripts now use that loopback host without changing auth. Review also corrected parsed RPC payloads, social-row error indexes, preserved failure values, actual membership-status routing, Clerk touch-target sizing, bounded mobile auth UI and plain product copy. The Windows native-CSS DLL install lock was resolved by stopping the old workspace dev server before clean installation.
+- Historical native integration issue (resolved 12 November): early tokens were missing the database role claim, then correctly signed tokens were rejected with 401 / `PGRST301`. The parent stopped blind retries and requested owner confirmation of native provider settings. The following resumed record supersedes that blocker; no token bypass or mocked identity was introduced.
+- Remaining at the initial milestone: full account/browser flows, protected profile-image storage and mobile/device evidence. The subsequent record updates live integration results. Parent reviews every phase/milestone and fixes findings before a PR; the owner reviews and alone merges `main`. Phase 2 remains In progress.
+- Evidence and next work: [setup](docs/phase-2-setup.md) and [verification](docs/phase-2-verification.md). Finish source review/checks and approved development integration as configuration becomes ready. No Phase 3 or live-pilot invitation scope is authorized.
+
+### Phase 2 resumed native integration verification — 12 November 2026
+
+- Status: **In progress**. The owner explicitly resumed Phase 2 and requested confirmation of setup. Phase 3 remains unauthorized; Phase 1/2 milestone PRs remain unmerged drafts.
+- Resolved setup blocker: after owner confirmation of native settings, a fresh real Clerk token with `role: authenticated` was accepted by Supabase with HTTP 200. An uninvited identity correctly read zero membership rows. The previous `PGRST301` failure is resolved rather than an active blocker.
+- Hosted verification: parent ran 11 successful checks using only three scoped synthetic development memberships. Brand, creator and administrator read only their own membership; brand/creator onboarding RPCs persisted and remained repeat-safe; cross-profile/social reads were denied; role escalation, ownership reassignment and wrong-role RPCs were denied; administrators had no broad profile access; invalid social data rolled back the multi-table save.
+- Authenticated application/suspension evidence: 11 HTTP route checks passed with real Clerk bearer tokens. Brand/creator dashboard, profile and onboarding rendered their own workspace; administrator dashboard was scoped and profile/onboarding redirected to dashboard; uninvited dashboard redirected to a correct access-pending page. After all three synthetic memberships were suspended, three hosted checks passed: own suspended status remained visible, profile/social queries returned zero rows, and dashboard redirected to access-restricted with no workspace data. All fixtures remain suspended and all check sessions were revoked.
+- Runtime verification note: the first HTTP attempt could not connect because no dev server was running. Parent started the existing local application at `http://localhost:3000` and reran the checks successfully; no code fix or auth bypass was needed.
+- Browser availability update: IAB became available on 12 November and the parent opened the actual local application DOM. Browser verification is in progress at 360/390/768/1280 px with keyboard and real account/form flows. The 11 November unavailable-browser notes are historical; no visual/interaction pass is claimed until results are recorded.
+- Local verification: same implementation agent reread the current plan, root `AGENTS.md` and relevant installed Next guidance. All 16 isolated tests, lint (zero warnings) and formatting checks passed again without source changes.
+- Remaining: authenticated application/browser/recovery flow evidence, protected profile-image storage and its direct API tests, and mobile/device QA at 360/390/768/1280 px and Android Chrome/iPhone Safari. No completion is inferred from hosted RPC results. Continue within Phase 2 with parent review before every PR; the owner alone merges `main`.
 
 ## Technical references
 
