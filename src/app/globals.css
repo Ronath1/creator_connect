@@ -1327,3 +1327,77 @@ h3 {
     padding-top: 40px;
   }
 }
+
+.profile-image-section {
+  margin-top: 36px;
+  border: 1px solid #d8e0e6;
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 650px;
+}
+.profile-image-section h2 {
+  margin-top: 0;
+  font-size: 26px;
+  letter-spacing: -0.6px;
+}
+.profile-image-section h2 span {
+  font-size: 14px;
+  color: #52656e;
+  letter-spacing: 0;
+}
+.profile-image-preview {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-block: 24px;
+}
+.profile-image-preview img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #f1f5f3;
+  border: 1px solid #d8e0e6;
+}
+.profile-image-preview > p {
+  flex: 1 1 180px;
+}
+.profile-image-placeholder {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  min-width: 96px;
+  height: 96px;
+  border: 1px dashed #9cabb4;
+  border-radius: 10px;
+  padding: 8px;
+  text-align: center;
+  font-size: 12px;
+  color: #52656e;
+}
+.profile-image-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.profile-image-form input[type="file"] {
+  max-width: 100%;
+  overflow: hidden;
+}
+.profile-image-form input::file-selector-button {
+  min-height: 44px;
+  padding: 10px 12px;
+  margin-right: 12px;
+  border: 1px solid #9cabb4;
+  border-radius: 6px;
+  color: #172b3a;
+  font-size: 16px;
+  background: #edf3ee;
+  cursor: pointer;
+}
+.profile-image-form button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}

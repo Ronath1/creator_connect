@@ -1,0 +1,38 @@
+# Phase 2 profile-image milestone
+
+Status: **In progress — implementation/local checks passed; final hosted API and browser evidence being recorded**. Prepared 12 November 2026 on `feat/phase-2-profile-images`, stacked on the unmerged authentication milestone (PR #3), which itself depends on PR #2. The parent reviews every milestone and corrects findings before a PR; the owner alone merges `main`. No Phase 3 work is included.
+
+## Image behavior and boundaries
+
+Active brand and creator members may optionally save a profile photo or brand logo from their own saved profile. Text/link onboarding works without an image. The form accepts JPEG, PNG or WebP still images up to 5 MiB and 16 million pixels. Client-side size validation avoids sending oversized files from the normal form; the server independently checks the actual bytes.
+
+The server checks file signatures, decodes through Sharp 0.35.5 with a 16-million-pixel bound, rejects animation/corruption, applies orientation, fits within 1024 × 1024 without enlargement, re-encodes WebP and strips metadata. Processing has a five-second timeout. Original filenames, EXIF/GPS metadata and input bytes are not stored by the application. Unsupported SVG, HTML, GIF and HEIC inputs are rejected rather than silently converted. A failed validation does not touch the existing image.
+
+The Server Action body cap is 6 MB to allow a 5 MiB file plus multipart overhead. The image form uses labelled 16 px inputs, at least 44 px controls, inline size errors, pending feedback, explicit save/remove actions and an optional image preview. Selecting a file does not replace the current image. Uncertain network/provider outcomes ask the user to refresh before retrying rather than claiming success or guaranteed rollback.
+
+## Private storage and replacement
+
+The CLI generated `supabase/migrations/20261112040650_phase_2_profile_images.sql`. Parent review preceded its application to the dedicated development project; the migration ledger matches that version and post-application security advisors returned no findings.
+
+The private `profile-images` bucket is limited to 5 MiB and `image/webp` uploads. Its Storage object policies permit only an active brand/creator to select, insert, update or delete the exact path `<internal-user-UUID>/profile.webp`. They derive identity from the real Clerk JWT subject and current controlled membership record, not user-editable metadata. Other users, administrators, uninvited identities and suspended memberships receive no access through these policies. Existing platform Storage schema/grants and other buckets are not replaced.
+
+One fixed object per member bounds storage and avoids orphaned versions or a second database pointer. Replacement uses the normal user-scoped Storage upsert API; removal deletes that object through the Storage API. No privileged key or local durable file is used. Concurrent avatar changes follow the last successful storage operation; avatars have no agreement/history semantics. App uploads use cache control zero; authenticated delivery uses private/no-store responses. Do not assume a successful upload instantly invalidates a file previously uploaded outside the application with a longer cache lifetime; hosted tests must verify current bytes before attributing an integrity failure to authorization.
+
+## Delivery remains a security boundary
+
+Storage bucket MIME restrictions do not validate image bytes: a direct owner Storage client can spoof a MIME label. Therefore the application never treats stored bytes as trusted just because they are named `.webp`. `/api/profile-image` checks real sign-in and current eligible membership, downloads only the caller's fixed object, then runs the same bounded decoding/re-encoding pipeline before returning WebP pixels. It responds with `X-Content-Type-Options: nosniff`, `Cache-Control: private, no-store, max-age=0` and a Cookie/Authorization `Vary` header. Missing/invalid images return no file bytes. Signed-out API calls receive 401; ineligible memberships receive 403.
+
+The preview bypasses Next's shared image optimizer so the browser retains its authenticated cookie on this private route. No public object URLs or signed capabilities are issued by the application. Owners can still download or deliberately share their own bytes using their authorized direct Storage API; this does not make those bytes safe for the application to serve. Existing externally issued signed URLs, if an owner creates one, have their own expiry semantics; the application does not promise to revoke such capabilities on suspension.
+
+## Verification
+
+| Check                   | Evidence / status                                                                                                                                                                                                                                                                                                         |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Local SQL/RLS           | Seven isolated PGlite tests cover private bucket limits, own insert/upsert, cross-user/admin/uninvited denial, fixed-path/ownership constraints, administrator exclusion, suspension and deletion. Storage MIME/size enforcement still requires actual hosted API tests.                                                  |
+| Actual image processing | Six Sharp tests cover JPEG/PNG/WebP output and metadata removal, orientation, malicious/forged/truncated formats, byte/pixel bounds, animation rejection and serve-time MIME-spoof defense.                                                                                                                               |
+| Existing tests          | All 16 core identity/profile validation tests still pass. Total suite: **29 passing tests**, independently rerun by parent.                                                                                                                                                                                               |
+| Source checks           | Type generation/strict TypeScript and lint (zero warnings) passed after the image UI/API hookup. Final production checks are recorded after remaining review changes.                                                                                                                                                     |
+| Hosted Storage          | Parent reviewed/applied the migration and is testing direct real-token Storage operations, replacement/current bytes, role/path/MIME/size and suspension behavior. No blanket pass is claimed until those results are recorded.                                                                                           |
+| Browser                 | Parent has a real IAB session and is testing actual image/form behavior and viewport layout. Screenshot capture timed out through both supported capture APIs, so rendered DOM/interaction evidence must be distinguished from screenshot visual inspection. No image/browser pass is inferred from source or HTTP alone. |
+
+Storage tests use only scoped synthetic development members/images. No real pilot invitations or production records are part of this milestone. Phase 2 stays In progress until its remaining authentication/recovery, mobile/device and storage checks are resolved or explicitly scoped by the owner.
