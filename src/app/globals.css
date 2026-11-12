@@ -1048,9 +1048,7 @@ h3 {
   font-size: 15px;
   line-height: 1.8;
 }
-.auth-page > div,
-.auth-page .cl-rootBox,
-.auth-page .cl-cardBox {
+.auth-page > div {
   min-width: 0;
   max-width: 100%;
 }
@@ -1067,11 +1065,6 @@ h3 {
 .member-heading p {
   font-size: 15px;
   margin-top: 8px;
-}
-.member-heading .cl-userButtonTrigger,
-.account-help .cl-userButtonTrigger {
-  min-width: 44px;
-  min-height: 44px;
 }
 .member-nav {
   display: flex;
