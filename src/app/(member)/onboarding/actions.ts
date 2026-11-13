@@ -11,7 +11,7 @@ import {
 import { requireMember } from "@/server/services/membership";
 
 export async function saveOnboarding(
-  _previous: OnboardingState,
+  previous: OnboardingState,
   form: FormData,
 ): Promise<OnboardingState> {
   const values = readOnboardingForm(form);
@@ -21,6 +21,9 @@ export async function saveOnboarding(
   } catch (error) {
     unstable_rethrow(error);
     return {
+      attempt: Number.isSafeInteger(previous?.attempt)
+        ? previous.attempt + 1
+        : 1,
       values,
       errors: {},
       message:
@@ -37,6 +40,9 @@ export async function saveOnboarding(
     for (const issue of result.error.issues)
       errors[issue.path.join(".")] ??= issue.message;
     return {
+      attempt: Number.isSafeInteger(previous?.attempt)
+        ? previous.attempt + 1
+        : 1,
       values,
       errors,
       message:
@@ -69,6 +75,9 @@ export async function saveOnboarding(
   }
   if (saveError)
     return {
+      attempt: Number.isSafeInteger(previous?.attempt)
+        ? previous.attempt + 1
+        : 1,
       values,
       errors: {},
       message:
