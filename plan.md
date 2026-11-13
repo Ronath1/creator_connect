@@ -1,7 +1,7 @@
 # CreatorConnect — Phased Development Plan
 
-Status: Phase 0 accepted and complete. Phase 1 implementation/executable checks delivered, browser verification pending. Phase 2 explicitly authorized and In progress; Phases 3–9 have not been authorized or started.
-Updated: 12 November 2026.
+Status: Phase 0 accepted and complete. Earlier manual/visual/device gaps remain recorded. Phase 3 marketplace implementation is In progress. The owner authorized finishing Phases 3 and 4, then Phase 5 readiness on 13 November; hosting/deployment will be decided later. Phases 6–9 remain unauthorized.
+Updated: 13 November 2026.
 Product context: [brand-influencer-product-vision.md](brand-influencer-product-vision.md).
 Phase 0 proposal: [phase-0-pilot-scope.md](phase-0-pilot-scope.md).
 
@@ -18,7 +18,7 @@ Confirmed direction from the product owner:
 - Design the website mobile-first: the owner expects most users to access it on phones. Core workflows must work fully on mobile, with responsive tablet and desktop layouts.
 - Start with a private pilot to validate collaboration workflows, then introduce real payments.
 - Start with a simple foundation and evolve toward Redis caching and greater scalability.
-- Phase 0 was accepted through the owner's merge of PR #1. The owner explicitly authorized Phases 1 and 2 separately on 11 November 2026, then directed Phase 2 development to continue while configuring services. No Phase 3 or later work is authorized.
+- Phase 0 was accepted through the owner's merge of PR #1. The owner explicitly authorized Phases 1 and 2 separately on 11 November 2026, then continued Phase 2 through setup and image verification. On 13 November the owner instructed: finish Phases 3 and 4 first, then move to Phase 5. Hosting/deployment decisions are expressly deferred; AWS access is available but no hosting provider or infrastructure is selected.
 
 CreatorConnect is a working project label; the product brief leaves the final name open.
 
@@ -44,7 +44,7 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 
 ## 3. How phase-by-phase work must proceed
 
-- Current position: Phase 0 is accepted and complete. Phase 1 retains an explicit browser QA gap. The owner separately authorized starting Phase 2 with that gap still open; Phase 2 integration-source/local-test work is in progress. Phases 3–9 have not started.
+- Current position: Phase 3 is In progress under the owner's 13 November instruction, continuing despite the recorded earlier manual/visual/device gaps. Phase 2 identity, onboarding and profile-image milestones have source, hosted and browser evidence; fresh signup/password reset and physical-device/visual checks remain. Phase 4 follows parent review and PR of Phase 3; Phase 5 readiness follows Phase 4. Do not describe an undeployed or unobserved pilot as complete.
 - Editing this plan does not authorize application development. Start implementation only when the owner explicitly instructs it.
 - Work within the approved phase. Do not silently add later-phase features or provision later-phase services.
 - At the start of a phase, review its prerequisites and resolve only the decisions needed for that phase. Future decisions may remain open.
@@ -64,9 +64,9 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 | 0 | Agreed pilot scope and design direction | Existing product vision and owner decisions | Complete — accepted via owner merge of PR #1 |
 | 1 | Next.js frontend/backend skeleton and UI foundation | Phase 0 | In progress — implementation/executable checks reviewed; browser QA resumed 12 November |
 | 2 | Clerk identity, Supabase data/access foundation, onboarding | Phase 1 and owner's development service configuration | In progress — hosted identity/onboarding verified; storage and browser/mobile checks underway |
-| 3 | Profiles, opportunity discovery, applications and selection | Phase 2 | Not started |
-| 4 | Agreed work, discussions, submissions, approvals and admin support | Phase 3 | Not started |
-| 5 | Verified Sri Lankan private pilot and feedback | Phase 4 and deployment readiness | Not started |
+| 3 | Profiles, opportunity discovery, applications and selection | Phase 2; owner authorized continued development with recorded manual/device gaps | In progress — implementation/checks delivered, Ready for review |
+| 4 | Agreed work, discussions, submissions, approvals and admin support | Phase 3 parent review and PR | Authorized next; not started |
+| 5 | Verified Sri Lankan private pilot and feedback | Phase 4 and deployment readiness | Authorized after Phase 4; readiness first, deployment/provider decision deferred |
 | 6 | Real payments with verified collection and payout behavior | Validated pilot and agreed provider/business rules | Not started |
 | 7 | Prioritized portfolios, integrations and reporting | Pilot feedback and feature-specific decisions | Not started |
 | 8 | Measured performance improvements, including Redis if justified | Operational measurements and a demonstrated bottleneck | Not started |
@@ -215,9 +215,11 @@ The existing responsive requirement is now an explicit mobile-first priority. Mo
 
 **Prerequisite:** Phase 2 complete and selection/hiring rules agreed.
 
+**Authorized sequencing exception (13 November):** the owner directed completion of Phases 3 and 4 while earlier credential-handoff/visual/device checks remain recorded. Continue application development without marking Phase 2 complete. Accepted Phase 0 hiring rules govern this implementation.
+
 **Work:**
 
-- Build profile editing and the agreed public profile views.
+- Build profile editing and the agreed member-only profile views; public portfolios remain deferred.
 - Add opportunity draft, publish, edit, and close flows with required work, deadlines, budget, and explicit currency.
 - Add paginated discovery, basic filters, opportunity details, influencer applications, and brand review/selection.
 - Add opportunity/application tables, indexes, constraints, RLS, and service-level authorization.
@@ -495,6 +497,18 @@ When phase work is authorized, append a short record for each phase:
 - Creator/account browser evidence: real OTP first-run onboarding, mismatched URL error with preserved draft, corrected save and persisted profile/social link, reopened form values and image removal/reload passed. No overflow at 360/390/768/1280 px and 844 × 390 landscape; field/select/details/save/add/account sizes and keyboard Tab/Enter checks passed. Brand/creator sign-out plus direct dashboard navigation returned to sign-in; account/security/device controls were visible.
 - Cleanup/review: all three exact synthetic memberships are suspended, Clerk backend active sessions are zero, Storage objects are zero and browser viewport is reset. Fresh security advisors returned no findings. Parent source/security review completed with no remaining findings. Final required checks passed: 29 tests, lint with zero warnings, formatting, generated route types/strict TypeScript and production build (11 static pages plus dynamic account/image routes). The image milestone is **Ready for review**, with parent final record review/PR creation next.
 - Remaining: owner handoff for fresh signup/password creation/reset (none performed), screenshot visual inspection, physical Android/iPhone, virtual keyboard and zoom verification. See [the image milestone](docs/phase-2-profile-images.md). Full Phase 2 remains In progress; no Phase 3 or merge authorization is inferred.
+
+### Phase 3 marketplace implementation — 13 November 2026
+
+- Status: **Ready for review — implementation/checks delivered**, with overall phase review pending. The owner explicitly instructed finishing Phases 3 and 4 first, then moving to Phase 5. Current branch `feat/phase-3-marketplace` is stacked on the unmerged Phase 2 image head; earlier manual/visual/device gaps remain. Parent review and PR are required for each phase/milestone, and the owner alone merges.
+- Delivered so far: member-safe profile projection and private avatar reads; own profile editing; opportunity drafts, publication, history, correction, close/reopen, bounded filtered discovery; private applications, withdrawal/rejection/selection; transactional one-slot reservation and pending agreement snapshot for Phase 4. Actual agreement confirmation, discussions, deliveries, notifications and support remain Phase 4 scope.
+- Database: parent reviewed/applied three CLI migrations (marketplace schema, hosted executor permissions repair, business-conflict status repair), aligned hosted ledger versions and generated real types. No ordinary privileged request key or direct lifecycle DML is used. All private entrypoints independently check current verified identity, active complete membership and authorization; internal helpers are not caller-executable. Parent checked actual hosted ACLs and security advisors, not only isolated superuser behavior.
+- Final checks: all 49 local tests, zero-warning lint, formatting, generated route types/strict TypeScript and production build passed after final corrections (8 static pages plus dynamic routes). Parent hosted 14 core real JWT cases passed, including independently concurrent selection requests with one successful reservation and one rejection. Full evidence and known hosted differences are in [Phase 3 marketplace](docs/phase-3-marketplace.md).
+- Lifecycle timing: successful reads/mutations reconcile expired opportunities/reservations/windows under opportunity locks; failed mutations roll back their reconciliation. This is traffic-driven until durable Phase 4 processing is implemented. Pending reservation preserves competing applicants; activation and delivery remain unavailable.
+- Owner decisions: ClamAV selected for Phase 4 scanning; real daemon/clean/EICAR verification remains due. Hosting/provider changes are deferred at the owner's request despite available AWS access. Phase 5 may prepare readiness/test/operational documents first; deployment, invitations, spending, four-week feedback observation and a completed pilot cannot be inferred from that preparation.
+- Browser/hosted follow-up: parent passed the complete two-account publish/discover/apply/select browser journey, locked-term correction/history and failed-input retention; actual member avatar delivery, cross-write/delete denial, MIME spoof and suspension checks passed. Detail DOM/touch checks passed at 360/390/768/1280 and 844×390 landscape. Source findings corrected native select resets and misleading unavailable reopen/select controls.
+- Final review/cleanup: parent reports no material source/security findings. Zero profile-image objects; three exact synthetic opportunities hidden/archived with history; all five scoped memberships suspended; all six fixture identities have zero active Clerk sessions; browser sign-out/viewport reset and dev-server stop complete; fresh security advisors returned no findings.
+- Remaining now: parent final record review and PR. Earlier fresh signup/password-reset handoff, screenshot/physical-phone/virtual-keyboard/zoom limits remain explicit. No Phase 4 implementation before parent Phase 3 review/PR, no Phase 6 authorization and no agent merge.
 
 ## Technical references
 

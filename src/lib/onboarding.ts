@@ -142,6 +142,7 @@ export type OnboardingValues = {
   links: SocialLink[];
 };
 export type OnboardingState = {
+  attempt: number;
   message: string;
   errors: Record<string, string>;
   values: OnboardingValues;

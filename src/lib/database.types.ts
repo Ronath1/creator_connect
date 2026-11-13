@@ -38,6 +38,54 @@ export type Database = {
         };
         Relationships: [];
       };
+      applications: {
+        Row: {
+          created_at: string;
+          id: string;
+          influencer_id: string;
+          opportunity_id: string;
+          proposal: string;
+          status: string;
+          updated_at: string;
+          work_urls: string[];
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          influencer_id: string;
+          opportunity_id: string;
+          proposal: string;
+          status?: string;
+          updated_at?: string;
+          work_urls?: string[];
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          influencer_id?: string;
+          opportunity_id?: string;
+          proposal?: string;
+          status?: string;
+          updated_at?: string;
+          work_urls?: string[];
+        };
+        Relationships: [
+          {
+            foreignKeyName: "applications_influencer_id_fkey";
+            columns: ["influencer_id"];
+            isOneToOne: false;
+            referencedRelation: "app_users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "applications_opportunity_id_fkey";
+            columns: ["opportunity_id"];
+            isOneToOne: false;
+            referencedRelation: "opportunities";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       brand_profiles: {
         Row: {
           categories: string[];
@@ -76,6 +124,80 @@ export type Database = {
           },
         ];
       };
+      collaborations: {
+        Row: {
+          activated_at: string | null;
+          agreement_expires_at: string;
+          application_id: string;
+          brand_id: string;
+          created_at: string;
+          ended_at: string | null;
+          id: string;
+          influencer_id: string;
+          opportunity_id: string;
+          status: string;
+          terms: Json;
+          terms_version: number;
+        };
+        Insert: {
+          activated_at?: string | null;
+          agreement_expires_at: string;
+          application_id: string;
+          brand_id: string;
+          created_at?: string;
+          ended_at?: string | null;
+          id?: string;
+          influencer_id: string;
+          opportunity_id: string;
+          status?: string;
+          terms: Json;
+          terms_version?: number;
+        };
+        Update: {
+          activated_at?: string | null;
+          agreement_expires_at?: string;
+          application_id?: string;
+          brand_id?: string;
+          created_at?: string;
+          ended_at?: string | null;
+          id?: string;
+          influencer_id?: string;
+          opportunity_id?: string;
+          status?: string;
+          terms?: Json;
+          terms_version?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "collaborations_application_id_opportunity_id_fkey";
+            columns: ["application_id", "opportunity_id"];
+            isOneToOne: false;
+            referencedRelation: "applications";
+            referencedColumns: ["id", "opportunity_id"];
+          },
+          {
+            foreignKeyName: "collaborations_brand_id_fkey";
+            columns: ["brand_id"];
+            isOneToOne: false;
+            referencedRelation: "app_users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "collaborations_influencer_id_fkey";
+            columns: ["influencer_id"];
+            isOneToOne: false;
+            referencedRelation: "app_users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "collaborations_opportunity_id_fkey";
+            columns: ["opportunity_id"];
+            isOneToOne: false;
+            referencedRelation: "opportunities";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       influencer_profiles: {
         Row: {
           bio: string;
@@ -107,6 +229,170 @@ export type Database = {
             columns: ["user_id"];
             isOneToOne: true;
             referencedRelation: "app_users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      marketplace_events: {
+        Row: {
+          created_at: string;
+          dedupe_key: string;
+          id: string;
+          kind: string;
+          opportunity_id: string;
+          recipient_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          dedupe_key: string;
+          id?: string;
+          kind: string;
+          opportunity_id: string;
+          recipient_id: string;
+        };
+        Update: {
+          created_at?: string;
+          dedupe_key?: string;
+          id?: string;
+          kind?: string;
+          opportunity_id?: string;
+          recipient_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "marketplace_events_opportunity_id_fkey";
+            columns: ["opportunity_id"];
+            isOneToOne: false;
+            referencedRelation: "opportunities";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "marketplace_events_recipient_id_fkey";
+            columns: ["recipient_id"];
+            isOneToOne: false;
+            referencedRelation: "app_users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      opportunities: {
+        Row: {
+          application_deadline: string;
+          brand_id: string;
+          brief: string;
+          budget_minor: number;
+          category: string;
+          close_reason: string | null;
+          created_at: string;
+          currency: string;
+          deliverables: Json;
+          delivery_deadline: string;
+          hidden_at: string | null;
+          id: string;
+          platforms: string[];
+          published_at: string | null;
+          revision_allowance: number;
+          selection_until: string | null;
+          status: string;
+          title: string;
+          updated_at: string;
+          version: number;
+        };
+        Insert: {
+          application_deadline: string;
+          brand_id: string;
+          brief: string;
+          budget_minor: number;
+          category: string;
+          close_reason?: string | null;
+          created_at?: string;
+          currency?: string;
+          deliverables: Json;
+          delivery_deadline: string;
+          hidden_at?: string | null;
+          id?: string;
+          platforms: string[];
+          published_at?: string | null;
+          revision_allowance?: number;
+          selection_until?: string | null;
+          status?: string;
+          title: string;
+          updated_at?: string;
+          version?: number;
+        };
+        Update: {
+          application_deadline?: string;
+          brand_id?: string;
+          brief?: string;
+          budget_minor?: number;
+          category?: string;
+          close_reason?: string | null;
+          created_at?: string;
+          currency?: string;
+          deliverables?: Json;
+          delivery_deadline?: string;
+          hidden_at?: string | null;
+          id?: string;
+          platforms?: string[];
+          published_at?: string | null;
+          revision_allowance?: number;
+          selection_until?: string | null;
+          status?: string;
+          title?: string;
+          updated_at?: string;
+          version?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "opportunities_brand_id_fkey";
+            columns: ["brand_id"];
+            isOneToOne: false;
+            referencedRelation: "app_users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      opportunity_history: {
+        Row: {
+          actor_id: string;
+          created_at: string;
+          id: string;
+          opportunity_id: string;
+          reason: string;
+          snapshot: Json;
+          version: number;
+        };
+        Insert: {
+          actor_id: string;
+          created_at?: string;
+          id?: string;
+          opportunity_id: string;
+          reason: string;
+          snapshot: Json;
+          version: number;
+        };
+        Update: {
+          actor_id?: string;
+          created_at?: string;
+          id?: string;
+          opportunity_id?: string;
+          reason?: string;
+          snapshot?: Json;
+          version?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "opportunity_history_actor_id_fkey";
+            columns: ["actor_id"];
+            isOneToOne: false;
+            referencedRelation: "app_users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "opportunity_history_opportunity_id_fkey";
+            columns: ["opportunity_id"];
+            isOneToOne: false;
+            referencedRelation: "opportunities";
             referencedColumns: ["id"];
           },
         ];
@@ -171,6 +457,15 @@ export type Database = {
         };
         Returns: undefined;
       };
+      marketplace_command: {
+        Args: { p_action: string; p_data?: Json; p_id?: string };
+        Returns: string;
+      };
+      marketplace_read: {
+        Args: { p_filters?: Json; p_id?: string; p_kind: string };
+        Returns: Json;
+      };
+      member_profile: { Args: { p_id: string }; Returns: Json };
       valid_social_url: {
         Args: { platform: string; url: string };
         Returns: boolean;

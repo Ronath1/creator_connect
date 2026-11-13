@@ -1,37 +1,29 @@
-# Current checkpoint — 12 November 2026
+# Current checkpoint — 13 November 2026
 
-Status: owner resumed with “ok continue the work”. The image milestone has passed parent source/security review and actual hosted/browser checks; final required tests/lint/format/types/production build all passed. **Phase 2 remains In progress** for the manual/visual/device limits below. Phase 3 is unauthorized.
+**Phase 3 implementation is Ready for review.** Parent source/security review, hosted/browser evidence and final executable checks are delivered. The owner resumed work and explicitly directed finishing Phases 3 and 4 before proceeding to Phase 5. Hosting decisions/provider changes are deferred until application phases finish; AWS access does not select or provision a host. Phase 5 readiness alone is not a deployed/observed pilot.
 
-## Branch and review workflow
+Current branch: `feat/phase-3-marketplace`, based on the unmerged Phase 2 image head `cbdcbd9`. Parent reviews every phase/milestone, fixes findings, then creates the PR. The owner alone merges. Reuse `/root/phase_worker`, requested GPT-6.1-sol medium, where the session is available; do not infer guaranteed identity persistence.
 
-- Branch: `feat/phase-2-profile-images`, delivered in ready-for-review image PR [#4](https://github.com/Ronath1/creator_connect/pull/4). Its base is unmerged authentication PR [#3](https://github.com/Ronath1/creator_connect/pull/3), which depends on Phase 1 PR [#2](https://github.com/Ronath1/creator_connect/pull/2). Review/merge in that order and retarget as appropriate.
-- Reuse `/root/phase_worker` (GPT-6.1-sol, medium) where available.
-- Parent reviews/corrects each milestone before its PR; the owner alone merges `main`.
-- Historical pause: the owner paused work and checkpoint `ca60002` was saved. That pause was explicitly revoked by the later resume; it is not an active instruction.
+## Implemented and verified so far
 
-## Verified implementation and behavior
+- Phase 2 identity, hosted onboarding/RLS and image milestone remain delivered/reviewed. [PR #4](https://github.com/Ronath1/creator_connect/pull/4) is stacked on [PR #3](https://github.com/Ronath1/creator_connect/pull/3), then [PR #2](https://github.com/Ronath1/creator_connect/pull/2); no merge is inferred. Prior explicit pause was revoked.
+- Phase 3 has member profile projections/private avatar access, opportunity creation/edit/history/publication/close/reopen, bounded filtered discovery, private applications and transactional selection with a pending agreement snapshot. See [Phase 3 details](docs/phase-3-marketplace.md).
+- Parent reviewed/applied the marketplace and two focused repair migrations, aligned local/hosted history and generated real database types. Actual hosted function ACLs and security advisors pass. Hosted migration-role privileges and PostgREST retry behavior differed from PGlite; repairs and evidence are documented.
+- Final 49 tests, zero-warning lint, formatting, generated route types/strict TypeScript and production build all passed after final source corrections. The build produced 8 static pages plus dynamic marketplace/auth/member/image routes.
+- Parent's 14 hosted JWT cases pass, including independent concurrent selection requests producing one successful reservation and one rejection. Pending competitors remain pending; no mutual agreement is implied.
+- Actual browser publish → discover → apply → select journey passed with separate synthetic brand/creator accounts, including exact LKR/Sri Lanka dates, correction history/material-field preservation, failed-input draft retention and reload persistence. Private member avatar reads/suspension/write-denial checks passed. Detail DOM/touch checks passed at 360/390/768/1280 and 844×390 landscape; screenshots/physical-phone evidence is still unavailable.
+- Browser category-reset finding was corrected with controlled selection, per-failure remount keys and cancelled native resets; fresh-page retest passed. Attempt counters tolerate older/malformed previous display state. Reopen/select UI now reflects reserved/committed slots and eligibility; ineligible Reopen control count was zero on retest.
 
-- Real native Clerk session tokens are accepted by Supabase. Hosted onboarding/RLS, own-membership isolation, controlled roles, retry-safe profile RPCs and suspension checks passed.
-- Real brand/creator browser OTP sign-in, restricted/active routing, onboarding validation with retained drafts, corrected save, persisted profile/social links, reopened values and sign-out gating passed.
-- Private profile images use one own UUID path, 5 MiB/16 MP bounds, actual JPEG/PNG/WebP decoding, 1024 px WebP output and stripped metadata. Delivery rechecks membership/current metadata and sanitizes bytes again; app URLs are private/no-store.
-- Hosted Storage/API checks passed: own upload/upsert/read/remove, active cross-user/admin/uninvited/path/MIME/size denials, creator-own operations, suspended read/write/delete/API denial, metadata-based removal and spoofed-byte rejection.
-- Actual brand image picker passed upload, replacement, selection-without-save preservation, refresh persistence, invalid-file rejection with old preview retained, oversized native blocking and removal despite an invalid picker. Creator image removal/reload passed.
-- Browser DOM checks found no overflow at 360/390/768/1280 px and creator 844 × 390 landscape. Inputs/controls met recorded sizes; Tab/Enter/menu/focus checks passed.
-- Redundant Clerk descendant CSS removed; fresh structural warning count zero and hydrated account trigger 44 × 44 px. Supported Next smooth-scroll attribute added.
-- Final required suite passed: 29 tests, lint with zero warnings, formatting, generated route types/strict TypeScript and production build (11 static pages plus dynamic account/image routes). Fresh Supabase security advisors returned no findings.
+## Current ownership and next work
 
-## Exact cleanup and runtime state
+Cleanup confirmed: zero profile-image objects; three exact Phase 3 synthetic opportunities hidden/archived with history retained; all five scoped memberships suspended; all six fixture identities have zero active Clerk sessions. Fresh security advisors returned no findings. Browser sign-out/viewport reset and dev-server stop are complete. No real pilot users were invited. Parent handles hosted mutations, commits, push and PRs.
 
-- All three scoped synthetic development memberships are **suspended**.
-- Clerk backend active sessions: **0**. Storage test objects: **0**.
-- Browser viewport override reset. No credential creation/reset, auth-setting change or account deletion was performed.
-- Parent stopped the dev server for final checks. Use `http://localhost:3000` and the localhost-bound scripts when restarting; parent manages final runtime handoff.
-- Secrets remain in ignored `.env.local`. Parent scanned exact configured values across milestone files and found none; no secrets are in this checkpoint.
+Worker application/doc edits and final checks are finished; parent stages, scans, commits, pushes and creates the Phase 3 PR next. Wait for parent instruction before Phase 4 implementation. The owner's through-Phase-5 authorization persists, but scope/dependencies and review order still apply. Do not run build/type generation concurrently with a dev server.
 
-## Remaining / handoff
+## Gaps and later dependencies
 
-- Parent review, executable checks and push are complete; image PR #4 is open for owner review. The local development server is stopped.
-- Owner manual credential handoff: fresh signup/new password and password-reset verification. Account/security/device controls were visible, but no credential was created or changed.
-- Screenshot capture timed out through both available APIs. No screenshot-based visual review, physical Android/iPhone, virtual keyboard or zoom test is claimed. Record these as outstanding limits.
-- Keep Phase 2 In progress until its remaining checks are completed or explicitly scoped by the owner. Do not begin Phase 3 or merge on the owner's behalf.
-- Detailed evidence: [image milestone](docs/phase-2-profile-images.md), [Phase 2 verification](docs/phase-2-verification.md), and [plan](plan.md).
+- Earlier fresh signup/password creation/reset require owner credential handoff; no credential has been created/reset by agents.
+- Supported screenshot capture still fails; physical Android Chrome/iPhone Safari, virtual keyboard and zoom evidence remains incomplete. DOM/browser viewport tests do not replace these checks.
+- Phase 4 uses owner-selected ClamAV. Local Docker/ClamAV is unavailable; implement the real daemon client/quarantine/fail-closed path and verify clean/EICAR against a configured daemon before enabling private arbitrary attachments. No fake clean result counts as integration evidence.
+- Phase 5 still needs deployment choice/production isolation/costs, operational readiness/restore, support/privacy/retention, actual cohort invitations and observation/feedback. No deployment, invitations, expenditure or merge is authorized here. Phases 6–9 remain outside current authorization.
+- `.env.local` remains ignored. Never print credentials or private records. Current configuration values are not part of these documents.

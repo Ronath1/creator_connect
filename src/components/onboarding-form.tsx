@@ -26,6 +26,7 @@ export function OnboardingForm({
   initialValues: OnboardingValues | null;
 }) {
   const initial: OnboardingState = {
+    attempt: 0,
     message: "",
     errors: {},
     values: initialValues ?? emptyValues,
@@ -33,6 +34,11 @@ export function OnboardingForm({
   const [state, action, pending] = useActionState(saveOnboarding, initial);
   const [linkCount, setLinkCount] = useState(
     Math.max(initial.values.links.length, 1),
+  );
+  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>(
+    platforms.map(
+      (platform, index) => initial.values.links[index]?.platform ?? platform,
+    ),
   );
   const errorFor = (key: string) =>
     state.errors[key] ? (
@@ -47,7 +53,11 @@ export function OnboardingForm({
       : undefined,
   });
   return (
-    <form action={action} className="profile-form">
+    <form
+      action={action}
+      className="profile-form"
+      onReset={(event) => event.preventDefault()}
+    >
       {state.message ? (
         <div className="form-summary" role="alert">
           <strong>{state.message}</strong>
@@ -167,9 +177,17 @@ export function OnboardingForm({
                 <div className="field">
                   <label htmlFor={`links-${index}-platform`}>Platform *</label>
                   <select
+                    key={`${state.attempt}.${index}`}
                     id={`links-${index}-platform`}
                     name={`platform_${index}`}
-                    defaultValue={link?.platform ?? platforms[index]}
+                    value={selectedPlatforms[index]}
+                    onChange={(event) =>
+                      setSelectedPlatforms((current) =>
+                        current.map((platform, row) =>
+                          row === index ? event.target.value : platform,
+                        ),
+                      )
+                    }
                     {...accessibility(`links.${index}.platform`)}
                   >
                     {platforms.map((platform) => (
