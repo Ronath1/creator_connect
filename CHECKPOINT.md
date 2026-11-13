@@ -1,14 +1,14 @@
 # Current checkpoint — 13 November 2026
 
-Phase 4 is **In progress** on `feat/phase-4-collaboration`, based on `2b20f67` / [Phase 3 PR #5](https://github.com/Ronath1/creator_connect/pull/5). This is a recoverable WIP snapshot, not Phase 4 completion or PR approval. The owner alone merges.
+Work is **PAUSED at the owner's explicit request** on `feat/phase-4-collaboration`. No development or testing until the owner resumes. Phase 4 remains incomplete. Source checkpoint `2f43225` is based on `2b20f67` / [Phase 3 PR #5](https://github.com/Ronath1/creator_connect/pull/5). This is a recoverable WIP snapshot, not Phase 4 completion or PR approval. The owner alone merges.
 
 ## Credit instruction and ownership
 
-The owner requested checkpoint-and-pause at **5% remaining credit**, then continuation after credits return to100%. Latest owner-reported balance: **12%**. Tools do not expose the credit meter; the owner was asked to send “pause” at5% and “resume” after reset. Work remains authorized. Do not infer a reset/resume from elapsed time. Save source/evidence on this existing branch before pausing.
+The owner requested checkpoint-and-pause at **5% remaining credit**, then continuation after credits return to100%. Latest reported balance was **12%**, followed by an explicit **pause** instruction. The current balance/5% threshold is not observable through tools. Both agents must remain paused until an owner resume instruction; do not infer a reset/resume from elapsed time.
 
 Reuse `/root/phase_worker` (requested GPT-6.1-sol, medium) where available; agent/session identity may not survive a reset. Parent owns review, hosted changes, commits/push/PR. Worker implements phases. Phases3–5 are authorized in order; hosting/deployment, invitations, spending and Phase6+ remain deferred. Phase5 readiness is not a deployed/observed pilot.
 
-Worker is temporarily **holding edits/testing for this Git snapshot**; release after checkpoint commit. Current atomic collaboration workspace/list/history pages are written. Notifications/admin/reports pages, navigation/dashboard hookup, final styling and executable/browser review remain. No final full-project lint/types/build claim exists.
+Worker was interrupted and instructed to remain **idle with no edits/testing** until owner resume. Current atomic collaboration workspace/list/history pages are written. Notifications/admin/reports pages, navigation/dashboard hookup, final styling and executable/browser review remain. No final full-project lint/types/build claim exists.
 
 ## Current implementation and hosted state
 
@@ -44,15 +44,17 @@ Hosted security advisors are empty; all public tables have RLS. Private function
 
 Next dev is **stopped**. Never run dev alongside build/typegen. Normalize generated `next-env.d.ts` through final production build.
 
-Portable parent-owned ClamAV is running in foreground tool session **24765**, loopback127.0.0.1:3310, root `C:/Users/ronat/AppData/Local/Temp/creatorconnect-clamav-qa-20261113`. Official ZIP digest and fresh definitions checked. Child-only TZ=UTC, AlertExceedsMax/AlertEncrypted enabled, limits>=10MiB; no Windows service/security changes. Stop before a credit pause or memory-heavy build. Session handles may be stale after reset; verify exact owned runtime before acting.
+Portable parent-owned ClamAV was **stopped for the pause** (old session24765 ended). Runtime/config remains under `C:/Users/ronat/AppData/Local/Temp/creatorconnect-clamav-qa-20261113`, loopback127.0.0.1:3310. Official ZIP digest and fresh definitions were checked. Restart only after resume with child-only TZ=UTC, AlertExceedsMax/AlertEncrypted and limits>=10MiB; refresh definitions if stale. No Windows service/security changes were made.
 
-All five synthetic memberships are currently active for QA; suspend before pausing/final cleanup, and verify/revoke own Clerk sessions:
+Both owned DEV cron jobs (`creatorconnect-collaboration-tick`, `creatorconnect-collaboration-job-history`) are **disabled operationally for the pause**. Their definitions/history remain intact. Re-enable only after resume and verify the pending cadence migration then; do not silently claim the scheduler is running.
+
+All five synthetic memberships were **suspended for the pause**. Session housekeeping covers only these six synthetic identities, never real users:
 - brand `6f4d07b2-1833-4df6-a155-12086ff09be7` / `user_3LzTVmNx3NEWwHSmHuEmMTqaUAq`;
 - creator `3eaf9868-d6f9-454a-a399-da66acea960e` / `user_3LzTVwnvV17Cnvj2hTpUg0pyTuk`;
 - admin `7d6166ac-e60f-444b-b9ac-f3831b393039` / `user_3LzTW0oedH5x2a3HXlnE0FfPSwB`;
 - rival `3cda5d17-1da0-413a-9537-86e2e42f164d` / `user_3M2lgXt7L8jlib9H5sT6WgTu7Js`;
 - other brand `e3ddf09f-c769-4741-a57b-1addc6155841` / `user_3M2lgf8SMQM4sW8pCqKJOvxTnvP`.
-Uninvited `user_3LxsaGSGs8N4ZUCKOujq4dZQM7M` has no membership. Public Clerk test OTP424242; never create/reset owner passwords.
+Uninvited `user_3LxsaGSGs8N4ZUCKOujq4dZQM7M` has no membership. Pause housekeeping confirmed zero active Clerk sessions across all six synthetic identities; none needed revocation. Public Clerk test OTP424242; never create/reset owner passwords.
 
 Phase4 synthetic opportunity/collaboration pairs:
 - `90d67157-12c3-49bc-a5fb-556330c1fd04` / `907993f8-d53c-43e4-9560-5ce275449f12` (completed);
@@ -64,7 +66,7 @@ Independent parent harnesses are outside Git under `C:/Users/ronat/AppData/Local
 
 ## Resume checklist
 
-1. Release snapshot hold if work is authorized; apply/verify focused case/cadence migration above. Keep applied files immutable.
+1. Wait for owner resume. Then reuse the worker, deliberately reactivate only scoped fixtures/owned jobs and runtime as needed; apply/verify focused case/cadence migration above. Keep applied files immutable.
 2. Finish notifications/admin/reports/nav/styles. Worker flagged remaining per-message attachment projection beyond first50, withdrawal/membership notification dedupe completeness, and support case review/cancellation UI.
 3. Final source/security review, formatting, zero-warning lint, strict types, full tests and production build. Parent production server/browser QA with separate accounts at360/390/768/1280 plus landscape; verify preserved errors/drafts and touch controls.
 4. Scoped cleanup/runtime stop; exact configured-secret scan of all staged including new files; commit/push Phase4 PR stacked on #5. **No Phase4 PR exists yet.**
