@@ -1,0 +1,6 @@
+import Link from "next/link";
+import{collaborationList}from "@/server/services/collaboration";
+import{deadline,money}from "@/lib/marketplace";
+import{PageLinks,offsetValue,PilotMoneyNotice}from "@/components/marketplace-view";
+export const metadata={title:"Collaborations"};
+export default async function CollaborationsPage({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}){const offset=offsetValue((await searchParams).offset),{data}=await collaborationList(offset);return <><h1>Your collaborations</h1><p className="member-intro">Confirm clear terms, discuss work and keep delivery evidence together.</p><PilotMoneyNotice/><div className="market-grid">{data.items.map(c=><article className="market-card" key={c.id}><span className="badge">{c.status.replaceAll("_"," ")}</span><h2><Link href={`/collaborations/${c.id}`}>{c.terms.title}</Link></h2><p>{c.brand_name??"Brand"} · {c.influencer_name??"Creator"}</p><p>{money(c.terms.budget_minor)} proposed compensation</p><p>Due {deadline(c.terms.delivery_deadline)}</p><Link className="action action-secondary" href={`/collaborations/${c.id}`}>Open workspace</Link></article>)}</div>{data.total===0?<p className="dashboard-empty">No matched work yet. A brand’s selection creates the first pending agreement.</p>:null}<PageLinks path="/collaborations" offset={offset} total={data.total}/></>;}
