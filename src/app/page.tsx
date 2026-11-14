@@ -233,8 +233,8 @@ export default function Home() {
             ))}
           </ol>
           <p className="workflow-note">
-            The pilot experience is being built. Marketplace features are not
-            available in this preview.
+            Approved members can sign in to use the private marketplace and
+            collaboration workspace. Payments remain disabled.
           </p>
         </div>
       </section>

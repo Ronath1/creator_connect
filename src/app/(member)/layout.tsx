@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AccountMenu } from "@/components/account-menu";
+import { NotificationLink } from "@/components/notification-link";
 import { IntegrationUnavailable } from "@/components/integration-unavailable";
 import { getIntegrationConfig } from "@/server/config";
 import { requireMember } from "@/server/services/membership";
@@ -40,6 +41,15 @@ export default async function MemberLayout({
         ) : null}
         {member.role === "influencer" ? (
           <Link href="/applications">My applications</Link>
+        ) : null}
+        {member.role !== "admin" ? (
+          <Link href="/collaborations">Collaborations</Link>
+        ) : (
+          <Link href="/admin">Pilot support</Link>
+        )}
+        <NotificationLink />
+        {member.role !== "admin" ? (
+          <Link href="/reports">Your reports</Link>
         ) : null}
         <Link href="/">Introduction</Link>
       </nav>

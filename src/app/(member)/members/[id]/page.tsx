@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { randomUUID } from "node:crypto";
+import { ReportForm } from "@/components/collaboration-forms";
+import { marketplaceContext } from "@/server/services/marketplace";
 import { notFound } from "next/navigation";
 import { getMemberProfile } from "@/server/services/marketplace";
 import { MemberAvatar } from "@/components/member-avatar";
@@ -8,6 +11,7 @@ export default async function MemberProfilePage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const { member } = await marketplaceContext();
   const profile = await getMemberProfile((await params).id);
   if (!profile) notFound();
   return (
@@ -59,6 +63,16 @@ export default async function MemberProfilePage({
           </>
         ) : null}
       </article>
+      {member.role !== "admin" ? (
+        <details className="market-card">
+          <summary>Report a concern about this profile</summary>
+          <ReportForm
+            relation="member_id"
+            relatedId={profile.id}
+            requestId={randomUUID()}
+          />
+        </details>
+      ) : null}
     </>
   );
 }

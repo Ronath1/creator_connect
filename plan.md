@@ -1,7 +1,7 @@
 # CreatorConnect — Phased Development Plan
 
-Status: Phase 0 accepted and complete. Earlier manual/visual/device gaps remain recorded. Phase 3 marketplace implementation is In progress. The owner authorized finishing Phases 3 and 4, then Phase 5 readiness on 13 November; hosting/deployment will be decided later. Phases 6–9 remain unauthorized.
-Updated: 13 November 2026.
+Status: Phase 0 accepted and complete. Earlier manual/visual/device gaps remain recorded. Phase 3 was reviewed and delivered in PR #5; Phase 4 source/checks are delivered with production browser review in progress. The owner authorized finishing Phases 3 and 4, then Phase 5 readiness; hosting/deployment will be decided later. Phases 6–9 remain unauthorized.
+Updated: 14 November 2026.
 Product context: [brand-influencer-product-vision.md](brand-influencer-product-vision.md).
 Phase 0 proposal: [phase-0-pilot-scope.md](phase-0-pilot-scope.md).
 
@@ -44,7 +44,7 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 
 ## 3. How phase-by-phase work must proceed
 
-- Current position: Phase 3 is In progress under the owner's 13 November instruction, continuing despite the recorded earlier manual/visual/device gaps. Phase 2 identity, onboarding and profile-image milestones have source, hosted and browser evidence; fresh signup/password reset and physical-device/visual checks remain. Phase 4 follows parent review and PR of Phase 3; Phase 5 readiness follows Phase 4. Do not describe an undeployed or unobserved pilot as complete.
+- Current position: Phase 3 parent review and PR #5 are delivered. Phase 4 source and executable checks are delivered under the owner's resumed instruction, with parent production browser review in progress. Fresh signup/password-reset handoff and physical-device/visual gaps remain recorded. Phase 5 readiness follows parent Phase 4 review/PR; do not describe an undeployed or unobserved pilot as complete.
 - Editing this plan does not authorize application development. Start implementation only when the owner explicitly instructs it.
 - Work within the approved phase. Do not silently add later-phase features or provision later-phase services.
 - At the start of a phase, review its prerequisites and resolve only the decisions needed for that phase. Future decisions may remain open.
@@ -65,7 +65,7 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 | 1 | Next.js frontend/backend skeleton and UI foundation | Phase 0 | In progress — implementation/executable checks reviewed; browser QA resumed 12 November |
 | 2 | Clerk identity, Supabase data/access foundation, onboarding | Phase 1 and owner's development service configuration | In progress — hosted identity/onboarding verified; storage and browser/mobile checks underway |
 | 3 | Profiles, opportunity discovery, applications and selection | Phase 2; owner authorized continued development with recorded manual/device gaps | In progress — implementation/checks delivered, Ready for review |
-| 4 | Agreed work, discussions, submissions, approvals and admin support | Phase 3 parent review and PR | Authorized next; not started |
+| 4 | Agreed work, discussions, submissions, approvals and admin support | Phase 3 parent review and PR | In progress — source/checks delivered, production browser review underway |
 | 5 | Verified Sri Lankan private pilot and feedback | Phase 4 and deployment readiness | Authorized after Phase 4; readiness first, deployment/provider decision deferred |
 | 6 | Real payments with verified collection and payout behavior | Validated pilot and agreed provider/business rules | Not started |
 | 7 | Prioritized portfolios, integrations and reporting | Pilot feedback and feature-specific decisions | Not started |
@@ -509,6 +509,17 @@ When phase work is authorized, append a short record for each phase:
 - Browser/hosted follow-up: parent passed the complete two-account publish/discover/apply/select browser journey, locked-term correction/history and failed-input retention; actual member avatar delivery, cross-write/delete denial, MIME spoof and suspension checks passed. Detail DOM/touch checks passed at 360/390/768/1280 and 844×390 landscape. Source findings corrected native select resets and misleading unavailable reopen/select controls.
 - Final review/cleanup: parent reports no material source/security findings. Zero profile-image objects; three exact synthetic opportunities hidden/archived with history; all five scoped memberships suspended; all six fixture identities have zero active Clerk sessions; browser sign-out/viewport reset and dev-server stop complete; fresh security advisors returned no findings.
 - Remaining now: parent final record review and PR. Earlier fresh signup/password-reset handoff, screenshot/physical-phone/virtual-keyboard/zoom limits remain explicit. No Phase 4 implementation before parent Phase 3 review/PR, no Phase 6 authorization and no agent merge.
+
+### Phase 4 implementation and resumed verification — 13–14 November 2026
+
+- Status: **In progress**. Owner authorized progression after Phase 3 parent review/PR #5, explicitly paused on 13 November and resumed on 14 November. Source is stacked on the unmerged Phase 3 branch. Parent reviews every milestone before PR; the owner alone merges. Phase 5 readiness has not started.
+- Delivered: immutable agreement versions/confirmations and mutually accepted amendments; stable item/revision usage; participant messages, full-item versioned submissions, feedback/revisions/explicit approval; pending and mutual/admin-case cancellation; reports, reasoned assigned-case private access, fixed-role membership controls and audit; recipient notifications, polling and durable expiry/reminder/event jobs. Protected responsive workspace, report and administrator screens replace public placeholders.
+- Files: real private ClamAV client, current-signature/branch checks, original/prepared-byte scanning, image metadata removal, private quarantine/promotion and worker-only finalization. Only the narrow server-only attachment module uses its separately revocable privileged credential; ordinary domain actions remain user-JWT scoped. No ordinary Storage bucket read/write policies or public/signed file capabilities are granted. Byte/hash/current authorization is checked on delivery.
+- Race/retry controls: fixed UUID paths, immutable linked evidence, double pending quota charge, finalized-clean-only user discard, 24-hour grace for uncertain writes, physical-absence-confirmed quota release, durable exclusive cleanup claims and fair retry/backoff. Incoming binary bytes and whole upload lifetime are bounded. The worker CLI is provided; production supervision/hosting remains deferred.
+- Reviewed development migrations: core collaboration, durable jobs, upload lifecycle, case history/cadence and evidence/event projection. Parent applied/reconciled exact versions and generated real types. Actual private ACL/RLS and security-advisor checks passed; normal callers cannot attest clean files, invoke internal helpers or write lifecycle tables.
+- Checks: current local suite has 76 passing cases and one opt-in real-daemon case skipped in that run; actual real-daemon clean/EICAR and denial cases passed separately. Zero-warning lint, formatting, generated route types/strict TypeScript and production build passed (4 static pages plus dynamic protected routes). Parent live JWT/concurrent quota, notifications, Storage/scanner/hash and HTTP route checks passed. Production browser/account-flow verification is underway; see [Phase 4 evidence](docs/phase-4-collaboration.md) and [operations](docs/phase-4-setup.md).
+- Operations: 30-second database cron runs were observed succeeding and draining outbox. Unread polling does not refresh workspace forms; notification-list refresh is page-local. Cleanup CLI confirmed physical absence for explicitly aged synthetic reservations. These are development proofs, not a production release or pilot observation.
+- Remaining: parent production browser review/corrections, final record review, scoped fixture/runtime cleanup and PR. Earlier credential-handoff, screenshot/physical-phone/virtual-keyboard/zoom gaps remain. Hosting, production isolation/restore, owner support/privacy acceptance and actual cohort/observation stay deferred to Phase 5 readiness/release decisions.
 
 ## Technical references
 

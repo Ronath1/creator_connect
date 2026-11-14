@@ -1,13 +1,141 @@
 "use client";
-import{useState,type FormEvent}from "react";
-import{useRouter}from "next/navigation";
-export function AttachmentUploader({id,configured,storedBytes}:{id:string;configured:boolean;storedBytes:number}){
- const router=useRouter(),[file,setFile]=useState<File|null>(null),[pending,setPending]=useState(false),[message,setMessage]=useState("");
- async function upload(event:FormEvent<HTMLFormElement>){event.preventDefault();if(!file)return;setPending(true);setMessage("");try{
-  const response=await fetch(`/api/collaborations/${id}/files`,{method:"POST",body:file,headers:{"X-File-Name":encodeURIComponent(file.name.slice(0,160))},signal:AbortSignal.timeout(125_000)});
-  const data=await response.json();if(!response.ok){setMessage(String(data.message??"Upload unavailable."));return;}
-  setMessage("File scanned and saved. Choose it below when sending a message or submission.");router.refresh();
- }catch{setMessage("We couldn’t confirm the upload. Refresh the workspace before trying again.");}finally{setPending(false);}}
- return <section className="market-card"><h2>Private files</h2><p>{(storedBytes/1048576).toFixed(2)} of 100 MB allowance in use, including quarantined/pending copies.</p><p className="form-help">JPEG, PNG, WebP or PDF; at most 10 MB each and five per message/submission. Scanning temporarily reserves space for both original and prepared copies. Images are normalized; PDFs download as attachments. Use external HTTPS links for video.</p>{configured?<form onSubmit={upload} className="profile-form"><div className="field"><label htmlFor="collaboration-upload">Choose one file</label><input id="collaboration-upload" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" required onChange={event=>{const selected=event.target.files?.[0]??null;event.target.setCustomValidity(selected&&selected.size>10*1024*1024?"Choose a file no larger than 10 MB.":"");setFile(selected);setMessage("");}}/></div><button className="action action-secondary" disabled={pending||!file}>{pending?"Scanning and saving…":"Scan and save file"}</button><p role="status">{message}</p></form>:<p className="notice">File uploads are temporarily unavailable. You can continue using HTTPS content links.</p>}</section>;
+import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
+export function AttachmentUploader({
+  id,
+  configured,
+  storedBytes,
+}: {
+  id: string;
+  configured: boolean;
+  storedBytes: number;
+}) {
+  const router = useRouter(),
+    [file, setFile] = useState<File | null>(null),
+    [pending, setPending] = useState(false),
+    [message, setMessage] = useState("");
+  async function upload(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!file) return;
+    setPending(true);
+    setMessage("");
+    try {
+      const response = await fetch(`/api/collaborations/${id}/files`, {
+        method: "POST",
+        body: file,
+        headers: { "X-File-Name": encodeURIComponent(file.name.slice(0, 160)) },
+        signal: AbortSignal.timeout(125_000),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        setMessage(String(data.message ?? "Upload unavailable."));
+        return;
+      }
+      setMessage(
+        "File scanned and saved. Open Discussion or Deliveries to attach it.",
+      );
+      router.refresh();
+    } catch {
+      setMessage(
+        "We couldn’t confirm the upload. Refresh the workspace before trying again.",
+      );
+    } finally {
+      setPending(false);
+    }
+  }
+  return (
+    <section className="market-card">
+      <h2>Private files</h2>
+      <p>
+        {(storedBytes / 1048576).toFixed(2)} of 100 MB allowance in use,
+        including quarantined/pending copies.
+      </p>
+      <p className="form-help">
+        JPEG, PNG, WebP or PDF; at most 10 MB each and five per
+        message/submission. Scanning temporarily reserves space for both
+        original and prepared copies. Images are normalized; PDFs download as
+        attachments. Use external HTTPS links for video.
+      </p>
+      {configured ? (
+        <form onSubmit={upload} className="profile-form">
+          <div className="field">
+            <label htmlFor="collaboration-upload">Choose one file</label>
+            <input
+              id="collaboration-upload"
+              type="file"
+              accept="image/jpeg,image/png,image/webp,application/pdf"
+              required
+              onChange={(event) => {
+                const selected = event.target.files?.[0] ?? null;
+                event.target.setCustomValidity(
+                  selected && selected.size > 10 * 1024 * 1024
+                    ? "Choose a file no larger than 10 MB."
+                    : "",
+                );
+                setFile(selected);
+                setMessage("");
+              }}
+            />
+          </div>
+          <button
+            className="action action-secondary"
+            disabled={pending || !file}
+          >
+            {pending ? "Scanning and saving…" : "Scan and save file"}
+          </button>
+          <p role="status">{message}</p>
+        </form>
+      ) : (
+        <p className="notice">
+          File uploads are temporarily unavailable. You can continue using HTTPS
+          content links.
+        </p>
+      )}
+    </section>
+  );
 }
-export function DiscardAttachment({collaboration,id}:{collaboration:string;id:string}){const router=useRouter(),[pending,setPending]=useState(false),[message,setMessage]=useState("");return <div><button className="action action-secondary" disabled={pending} onClick={async()=>{setPending(true);try{const response=await fetch(`/api/collaborations/${collaboration}/files`,{method:"DELETE",headers:{"Content-Type":"application/json"},body:JSON.stringify({id}),signal:AbortSignal.timeout(90_000)});const data=await response.json();setMessage(String(data.message));if(response.ok)router.refresh();}catch{setMessage("Cleanup could not be confirmed. Refresh before retrying.");}finally{setPending(false);}}}>{pending?"Discarding…":"Discard unshared file"}</button><p role="status">{message}</p></div>;}
+export function DiscardAttachment({
+  collaboration,
+  id,
+}: {
+  collaboration: string;
+  id: string;
+}) {
+  const router = useRouter(),
+    [pending, setPending] = useState(false),
+    [message, setMessage] = useState("");
+  return (
+    <div>
+      <button
+        className="action action-secondary"
+        disabled={pending}
+        onClick={async () => {
+          setPending(true);
+          try {
+            const response = await fetch(
+              `/api/collaborations/${collaboration}/files`,
+              {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id }),
+                signal: AbortSignal.timeout(90_000),
+              },
+            );
+            const data = await response.json();
+            setMessage(String(data.message));
+            if (response.ok) router.refresh();
+          } catch {
+            setMessage(
+              "Cleanup could not be confirmed. Refresh before retrying.",
+            );
+          } finally {
+            setPending(false);
+          }
+        }}
+      >
+        {pending ? "Discarding…" : "Discard unshared file"}
+      </button>
+      <p role="status">{message}</p>
+    </div>
+  );
+}
