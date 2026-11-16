@@ -527,12 +527,12 @@ When phase work is authorized, append a short record for each phase:
 
 ### Phase 5 readiness documentation — 16 November 2026
 
-- Status: **In progress — documentation milestone parent-reviewed, ready for PR** on `feat/phase-5-pilot-readiness`, stacked on Phase 4 head `ad702fc` / draft PR #6. No application features, dependencies, services or migrations changed. The owner alone merges.
+- Status: **In progress — documentation milestone parent-reviewed and delivered in [PR #7](https://github.com/Ronath1/creator_connect/pull/7)** on `feat/phase-5-pilot-readiness`, stacked on Phase 4 head `ad702fc` / draft PR #6. No application features, dependencies, services or migrations changed. The owner alone merges.
 - Delivered: [release gates and owner decisions](docs/phase-5-readiness.md), [verification/device/load/feedback records](docs/phase-5-verification.md) and [operations/incident/isolated restore runbook](docs/phase-5-operations.md). Blank records are explicitly unexecuted. RPO/RTO, operator/contact, privacy acceptance, hosting/cost and cohort decisions remain unset.
 - Dependency: continue the existing revision-requested collaboration and open admin report from CHECKPOINT when browser access returns; do not replace missing browser evidence with backend state changes. Physical-phone/visual/keyboard/zoom and fresh-signup/password-reset handoff gaps persist.
 - Retention: uncertain uploads become eligible after a 24-hour grace plus scheduling/retry delay, rather than a maximum 24-hour cleanup promise. Owner wording acceptance is required before invitations. Linked evidence/audit retains the pilot-end plus 90-day review proposal; no automatic destructive purge is added.
 - Validation: documentation formatting, local-link and whitespace checks only; no runtime/provider calls, deployment, backup/restore, performance measurement, invitations or feedback collection were performed by this milestone. The current full-suite/build and real scanner evidence belongs to Phase 4, not new Phase 5 execution.
-- Remaining: PR handoff of reviewed readiness material; all release gates and actual pilot observation/owner review. Phase 5 remains In progress; payments/Phase 6+ are unauthorized.
+- Remaining: owner PR review, Phase 4 browser checks, all release gates and actual pilot observation/owner review. Phase 5 remains In progress; payments/Phase 6+ are unauthorized.
 
 ## Technical references
 
