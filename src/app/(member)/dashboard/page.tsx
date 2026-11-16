@@ -23,19 +23,19 @@ export default async function DashboardPage() {
           ? "Publish a clear opportunity, review applications and reserve your next collaboration."
           : member.role === "influencer"
             ? "Discover opportunities that fit your work and keep track of your applications."
-            : "Your administrator membership is active. Member-management and support screens are not available yet."}
+            : "Review assigned cases, manage approved membership and record support interventions."}
       </p>
       <div className="dashboard-empty">
         <span className="eyebrow">A CLEAR START</span>
         <h2>
           {member.role === "admin"
-            ? "Support tools are on the way."
+            ? "Support with a clear record."
             : "You’re ready for the next step."}
         </h2>
         <p>
           {member.role === "admin"
-            ? "Member-management tools are not available yet. Please contact the pilot owner to arrange access changes."
-            : "Open your marketplace to see the latest opportunities and application statuses. Agreement confirmation and delivery tools are being prepared."}
+            ? "Use the report queue for case-bound private access, membership controls for approved accounts, and audit history to review recorded actions."
+            : "Open your opportunities or applications to discover work, then use Collaborations to confirm terms, discuss evidence and review delivery."}
         </p>
         {member.role !== "admin" ? (
           <Link
@@ -49,6 +49,15 @@ export default async function DashboardPage() {
               : "Discover opportunities"}
           </Link>
         ) : null}
+        {member.role === "admin" ? (
+          <Link className="action action-primary" href="/admin">
+            Open pilot support
+          </Link>
+        ) : (
+          <Link className="action action-secondary" href="/collaborations">
+            Your collaborations
+          </Link>
+        )}
       </div>
       <div className="notice">
         <strong>Payments are not enabled</strong>

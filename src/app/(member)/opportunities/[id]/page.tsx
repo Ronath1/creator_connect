@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { randomUUID } from "node:crypto";
+import { ReportForm } from "@/components/collaboration-forms";
 import { notFound } from "next/navigation";
 import { getOpportunity } from "@/server/services/marketplace";
 import { deadline, money } from "@/lib/marketplace";
@@ -138,13 +140,18 @@ export default async function OpportunityDetail({
           <h2>{data.collaboration.status.replaceAll("_", " ")}</h2>
           <p>
             The selected match is saved separately from application and delivery
-            status. Agreement confirmation and delivery tools are being
-            prepared.
+            status. Confirm terms and track delivery in the private workspace.
           </p>
           <p>
             Agreement window ends{" "}
             {deadline(data.collaboration.agreement_expires_at)}.
           </p>
+          <Link
+            className="action action-primary"
+            href={`/collaborations/${data.collaboration.id}`}
+          >
+            Open collaboration workspace
+          </Link>
         </section>
       ) : null}
       {member.role === "influencer" ? (
@@ -256,6 +263,16 @@ export default async function OpportunityDetail({
           </details>
         ))}
       </section>
+      {member.role !== "admin" ? (
+        <details className="market-card">
+          <summary>Report a concern about this brief</summary>
+          <ReportForm
+            relation="opportunity_id"
+            relatedId={id}
+            requestId={randomUUID()}
+          />
+        </details>
+      ) : null}
     </>
   );
 }

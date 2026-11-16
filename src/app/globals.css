@@ -1412,6 +1412,61 @@ h3 {
   margin-bottom: 20px;
   font-weight: 600;
 }
+.collaboration-form {
+  margin-block: 20px;
+  max-width: 100%;
+}
+.collaboration-form fieldset {
+  min-width: 0;
+}
+.collaboration-form label:has(input[type="checkbox"]) {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #d8e0e6;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.collaboration-form input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.member-nav a[aria-current="page"] {
+  background: #e7f0ec;
+  color: #134e46;
+  font-weight: 700;
+}
+.unread-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 24px;
+  min-height: 24px;
+  margin-left: 8px;
+  padding: 2px 5px;
+  border-radius: 20px;
+  background: #0f766e;
+  color: #fff;
+  font-size: 12px;
+}
+.market-card article + article {
+  border-top: 1px solid #d8e0e6;
+  padding-top: 20px;
+  margin-top: 24px;
+}
+.market-card form[method="post"] {
+  margin-block: 12px;
+}
+@media (max-width: 640px) {
+  .collaboration-form .market-actions > .action {
+    width: 100%;
+  }
+  .collaboration-form > .action {
+    width: 100%;
+  }
+}
 .market-card {
   background: #fff;
   border: 1px solid var(--border, #d8e0e6);
