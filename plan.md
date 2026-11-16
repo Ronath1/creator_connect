@@ -1,6 +1,6 @@
 # CreatorConnect — Phased Development Plan
 
-Status: Phase 0 accepted and complete. Earlier manual/visual/device gaps remain recorded. Phase 3 was reviewed and delivered in PR #5; Phase 4 source/checks are delivered with production browser review in progress. The owner authorized finishing Phases 3 and 4, then Phase 5 readiness; hosting/deployment will be decided later. Phases 6–9 remain unauthorized.
+Status: Phase 0 accepted and complete. Earlier manual/visual/device gaps remain recorded. Phase 3 was reviewed and delivered in PR #5; Phase 4 was parent-reviewed and delivered in draft PR #6 with remaining browser checks blocked by current browser unavailability. Phase 5 readiness documentation is in progress under the owner's authorization; hosting/deployment will be decided later. Neither Phase 4 nor the deployed/observed Phase 5 pilot is complete. Phases 6–9 remain unauthorized.
 Updated: 16 November 2026.
 Product context: [brand-influencer-product-vision.md](brand-influencer-product-vision.md).
 Phase 0 proposal: [phase-0-pilot-scope.md](phase-0-pilot-scope.md).
@@ -44,7 +44,7 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 
 ## 3. How phase-by-phase work must proceed
 
-- Current position: Phase 3 parent review and PR #5 are delivered. Phase 4 source and executable checks are delivered under the owner's resumed instruction, with parent production browser review in progress. Fresh signup/password-reset handoff and physical-device/visual gaps remain recorded. Phase 5 readiness follows parent Phase 4 review/PR; do not describe an undeployed or unobserved pilot as complete.
+- Current position: Phase 4 parent review and draft PR #6 are delivered; its preserved browser journeys remain pending because browser access is unavailable. Phase 5 readiness documentation may proceed independently after that handoff under the owner's authorization. Fresh signup/password-reset handoff and physical-device/visual gaps remain recorded; do not describe an undeployed or unobserved pilot as complete.
 - Editing this plan does not authorize application development. Start implementation only when the owner explicitly instructs it.
 - Work within the approved phase. Do not silently add later-phase features or provision later-phase services.
 - At the start of a phase, review its prerequisites and resolve only the decisions needed for that phase. Future decisions may remain open.
@@ -65,8 +65,8 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 | 1 | Next.js frontend/backend skeleton and UI foundation | Phase 0 | In progress — implementation/executable checks reviewed; browser QA resumed 12 November |
 | 2 | Clerk identity, Supabase data/access foundation, onboarding | Phase 1 and owner's development service configuration | In progress — hosted identity/onboarding verified; storage and browser/mobile checks underway |
 | 3 | Profiles, opportunity discovery, applications and selection | Phase 2; owner authorized continued development with recorded manual/device gaps | In progress — implementation/checks delivered, Ready for review |
-| 4 | Agreed work, discussions, submissions, approvals and admin support | Phase 3 parent review and PR | In progress — source/checks delivered, production browser review underway |
-| 5 | Verified Sri Lankan private pilot and feedback | Phase 4 and deployment readiness | Authorized after Phase 4; readiness first, deployment/provider decision deferred |
+| 4 | Agreed work, discussions, submissions, approvals and admin support | Phase 3 parent review and PR | In progress — parent-reviewed draft PR #6; preserved browser checks pending access |
+| 5 | Verified Sri Lankan private pilot and feedback | Phase 4 and deployment readiness | In progress — readiness documentation only; Phase 4 checks and deployment/cohort remain outstanding |
 | 6 | Real payments with verified collection and payout behavior | Validated pilot and agreed provider/business rules | Not started |
 | 7 | Prioritized portfolios, integrations and reporting | Pilot feedback and feature-specific decisions | Not started |
 | 8 | Measured performance improvements, including Redis if justified | Operational measurements and a demonstrated bottleneck | Not started |
@@ -254,6 +254,8 @@ The existing responsive requirement is now an explicit mobile-first priority. Mo
 **Goal:** validate the complete collaboration journey with invited users in Sri Lanka before real payments.
 
 **Prerequisite:** Phase 4 complete and pilot hosting/support arrangements selected.
+
+**Recorded readiness exception, 16 November:** after parent review and draft [Phase 4 PR #6](https://github.com/Ronath1/creator_connect/pull/6), the owner-authorized independent readiness documents may proceed while preserved Phase 4 browser checks remain incomplete. This does not waive the deployment/invitation prerequisite or mark Phase 4 complete. Hosting/provider configuration, provisioning, spending and invitations remain deferred.
 
 **Work:**
 
@@ -522,6 +524,15 @@ When phase work is authorized, append a short record for each phase:
 - Draft handoff: parent source review found no new material defect; browser access is unavailable in this session, so creator resubmission/final approval, administrator UI and affected copy/layout retests remain pending. Exact synthetic memberships are suspended, sessions revoked, owned jobs disabled and local runtimes stopped; existing evidence is preserved. Phase 4 is not marked complete.
 - Retention decision before invitations: uncertain uploads become cleanup-eligible after a 24-hour grace plus scheduling/retry delay. This differs from Phase 0's proposed cleanup within 24 hours and needs owner wording review; no 24-hour maximum is promised.
 - Remaining: draft PR handoff and unfinished browser checks above. Earlier credential-handoff, screenshot/physical-phone/virtual-keyboard/zoom gaps remain. Phase 5 may prepare readiness material after the reviewed draft handoff; hosting, production isolation/restore, owner support/privacy acceptance and actual cohort/observation remain deferred release requirements.
+
+### Phase 5 readiness documentation — 16 November 2026
+
+- Status: **In progress — documentation milestone parent-reviewed and delivered in [PR #7](https://github.com/Ronath1/creator_connect/pull/7)** on `feat/phase-5-pilot-readiness`, stacked on Phase 4 head `ad702fc` / draft PR #6. No application features, dependencies, services or migrations changed. The owner alone merges.
+- Delivered: [release gates and owner decisions](docs/phase-5-readiness.md), [verification/device/load/feedback records](docs/phase-5-verification.md) and [operations/incident/isolated restore runbook](docs/phase-5-operations.md). Blank records are explicitly unexecuted. RPO/RTO, operator/contact, privacy acceptance, hosting/cost and cohort decisions remain unset.
+- Dependency: continue the existing revision-requested collaboration and open admin report from CHECKPOINT when browser access returns; do not replace missing browser evidence with backend state changes. Physical-phone/visual/keyboard/zoom and fresh-signup/password-reset handoff gaps persist.
+- Retention: uncertain uploads become eligible after a 24-hour grace plus scheduling/retry delay, rather than a maximum 24-hour cleanup promise. Owner wording acceptance is required before invitations. Linked evidence/audit retains the pilot-end plus 90-day review proposal; no automatic destructive purge is added.
+- Validation: documentation formatting, local-link and whitespace checks only; no runtime/provider calls, deployment, backup/restore, performance measurement, invitations or feedback collection were performed by this milestone. The current full-suite/build and real scanner evidence belongs to Phase 4, not new Phase 5 execution.
+- Remaining: owner PR review, Phase 4 browser checks, all release gates and actual pilot observation/owner review. Phase 5 remains In progress; payments/Phase 6+ are unauthorized.
 
 ## Technical references
 
