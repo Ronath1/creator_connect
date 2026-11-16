@@ -36,6 +36,8 @@ The larger original/prepared file size is reserved twice during processing, cons
 
 Users can discard only finalized clean, unshared files. Failed/aborted uploads retain quota and are marked rejected; no uncertain in-flight copy is immediately purged. Unscanned records cannot release quota until the 24-hour grace has elapsed. Cleanup claims are durable and exclusive for two hours; least-attempted ordering and retry backoff prevent failed old batches from starving later orphans. Both buckets must confirm object absence before a row becomes purged and releases its charge. A concurrent link wins over cleanup without deleting shared evidence. Record failures and investigate persistent scanner/Storage errors before inviting users.
 
+This differs from the accepted Phase 0 proposal that pending uploads would be cleaned within 24 hours. Uncertain writes become eligible after a 24-hour grace, followed by scheduling/retry delay; no 24-hour deletion maximum is promised. The owner must review this retention wording before invitations. Linked collaboration evidence and product audit retention are separate.
+
 ## Notifications and scheduled work
 
 The reviewed `pg_cron` job runs the bounded SQL tick every 30 seconds. It reconciles opportunity/agreement expiry, deduplicates transactional events into recipient notifications and produces deadline/cancellation support reminders. Candidate filters drain completed work instead of reselecting terminal rows forever. Job history retention is limited to owned job runs; product evidence/audit retention is separate.
