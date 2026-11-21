@@ -1,6 +1,6 @@
 # Current checkpoint — 21 November 2026
 
-Current branch: `feat/phase-7-creator-portfolios`, based on owner-merged Phase5 branch `d110b84` (tree equivalent to Phase6 checkpoint `5b15ec5`). Owner selected “Start Phase7 creator portfolios; keep Phase6 pending” on21November. PRs #4/#5/#7/#8 were merged into feature-branch bases, not main; #2/#3/#6 remain open. Main still contains Phase0. Phase6 discovery is delivered, but payment integration is pending actual provider/model/account dependencies. Phase4 browser and Phase5 deployed-pilot gaps remain open. The owner alone merges.
+Current branch: `feat/phase-7-creator-portfolios` / [draft PR #9](https://github.com/Ronath1/creator_connect/pull/9), based on owner-merged Phase5 branch `d110b84` (tree equivalent to Phase6 checkpoint `5b15ec5`). Initial portfolio commit is `5a14268`; final checkpoint metadata follows on the same branch. Owner selected “Start Phase7 creator portfolios; keep Phase6 pending” on21November. PRs #4/#5/#7/#8 were merged into feature-branch bases, not main; #2/#3/#6 remain open. Main still contains Phase0. Phase6 payment integration and Phase4–5 verification/release gaps remain open. The owner alone merges.
 
 ## Authorization and ownership
 
@@ -16,7 +16,7 @@ Source and independent parent review are delivered. Full checks21November:91test
 
 Important HTTP nuance: withdrawn/suspended portfolios return Next's streamed not-found boundary (`NEXT_HTTP_ERROR_FALLBACK;404`, visible PAGE NOT FOUND), sometimes with HTTP200 after streaming begins, as installed Next docs describe. Published identity/work links are absent, response remains no-store/noindex and RPC returnsnull. Initial literal404-only assertion was corrected; no app change. Do not claim a guaranteed HTTP404 status or browser interaction from this check.
 
-Browser inventory21November returned no apps/browsers and openingIAB failed. Interactive editor/save/preview/publish/unpublish, screenshot, rendered360px/mobilelayout, physical phones/keyboard/zoom remain pending. Prepare a draft portfolio PR with these gaps explicit; Phase7 is not marked complete. No Phase8 work.
+Browser inventory21November returned no apps/browsers and openingIAB failed. Interactive editor/save/preview/publish/unpublish, screenshot, rendered360px/mobilelayout, physical phones/keyboard/zoom remain pending. Draft PR #9 explicitly records these gaps; Phase7 is not marked complete. Final changed-document checks found37local targets with zero missing, all19stagedfiles passed exact configured-secret scan and whitespace checks. No Phase8 work.
 
 Final cleanup: synthetic portfolio `cc-portfolio-qa-20261121` belongs to creator `3eaf9868-d6f9-454a-a399-da66acea960e`, revision10, UNPUBLISHED; zero DB publications. All5 scoped memberships suspended, zero active Clerk sessions across6identities, both owned cron jobs OFF. Parent productionserver87711 stopped; scanner not started. Helpers outsideGit in `C:/Users/ronat/AppData/Local/Temp/`: `creatorconnect-phase7-hosted-20261121.cjs` (one-time initial sequence, do not rerun unchanged now), `creatorconnect-phase7-http-20261121.cjs`, `creatorconnect-phase7-fixture-20261121.cjs`. They read ignored env, keep tokens only in memory and revoke own sessions in finally. Reactivate only scoped fixtures when needed; preserve prior Phase4 evidence.
 
