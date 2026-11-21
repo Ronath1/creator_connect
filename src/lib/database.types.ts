@@ -615,6 +615,47 @@ export type Database = {
           },
         ];
       };
+      creator_portfolios: {
+        Row: {
+          draft: Json;
+          first_published_at: string | null;
+          published_at: string | null;
+          published_content: Json | null;
+          revision: number;
+          slug: string;
+          updated_at: string;
+          user_id: string;
+        };
+        Insert: {
+          draft: Json;
+          first_published_at?: string | null;
+          published_at?: string | null;
+          published_content?: Json | null;
+          revision?: number;
+          slug: string;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          draft?: Json;
+          first_published_at?: string | null;
+          published_at?: string | null;
+          published_content?: Json | null;
+          revision?: number;
+          slug?: string;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "creator_portfolios_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: true;
+            referencedRelation: "app_users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       influencer_profiles: {
         Row: {
           bio: string;
@@ -1111,6 +1152,17 @@ export type Database = {
         };
         Returns: undefined;
       };
+      creator_portfolio: { Args: { p_slug: string }; Returns: Json };
+      creator_portfolio_command: {
+        Args: {
+          p_action: string;
+          p_consent?: boolean;
+          p_data?: Json;
+          p_expected_revision: number;
+        };
+        Returns: Json;
+      };
+      creator_portfolio_editor: { Args: never; Returns: Json };
       mark_notification: { Args: { p_id: string }; Returns: undefined };
       marketplace_command: {
         Args: { p_action: string; p_data?: Json; p_id?: string };
