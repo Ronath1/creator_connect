@@ -259,10 +259,10 @@ export function OnboardingForm({
         </fieldset>
       )}
       <div className="notice">
-        <strong>Profile images are not available yet</strong>
+        <strong>Your image can come next</strong>
         <p>
-          You can finish your profile with text and links. Image uploads are not
-          available yet.
+          Finish these details first. You can add an optional profile photo or
+          brand logo from your saved profile afterwards.
         </p>
       </div>
       <button

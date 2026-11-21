@@ -2,7 +2,7 @@
 
 A Next.js application for the Sri Lanka private pilot. The Phase 1 foundation includes the public introduction, shared design tokens/navigation and safe route states. The Phase 2 source milestone adds real Clerk/Supabase integration wiring, controlled membership, atomic profile onboarding, and member dashboard/profile shells.
 
-Account flows require the owner's configured development services and an approved membership. They fail closed when configuration is absent. No marketplace opportunities, applications, uploads or payments are implemented. Source/local tests do not establish hosted integration success. See [the plan](plan.md), [accepted pilot scope](phase-0-pilot-scope.md), and [Phase 2 setup](docs/phase-2-setup.md).
+Account flows require the owner's configured development services and an approved membership. They fail closed when configuration is absent. Optional private profile photos/logos now use real Supabase Storage and bounded image processing. Marketplace opportunities, applications, collaboration attachments and payments are not implemented. See [the plan](plan.md), [accepted pilot scope](phase-0-pilot-scope.md), [Phase 2 setup](docs/phase-2-setup.md) and [profile-image milestone](docs/phase-2-profile-images.md) for verified behavior and remaining checks.
 
 ## Run locally
 
@@ -52,7 +52,7 @@ Design tokens follow the accepted slate/teal direction. Components provide visib
 | ------------------ | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `APP_URL`          | Optional server-only metadata origin, defaults to localhost             | Set to chosen deployment origin before release                                         |
 | Clerk              | Real SDK/provider/proxy and auth pages, gated by complete configuration | Verify owner's dev application, session/recovery flows and native Supabase integration |
-| Supabase           | User-token client, migration/RLS and onboarding RPC source              | Apply/test only in approved dev target, generate DB types; storage remains disabled    |
+| Supabase           | User-token client, onboarding RPCs and private profile images           | Native trust/core and Storage checks passed; browser/device verification continues     |
 | Monitoring         | No external monitoring provider                                         | Before pilot release: owner-approved tooling and privacy-safe operational measurements |
 | Payments           | Unavailable; informational pilot language                               | Phase 6 after provider/business-rule approval                                          |
 

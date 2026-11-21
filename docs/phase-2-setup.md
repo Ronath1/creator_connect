@@ -1,6 +1,6 @@
 # Phase 2 integration setup and verification
 
-Status: Phase 2 in progress. Native Clerk–Supabase trust and scoped hosted onboarding/RLS checks passed on 12 November 2026. A browser became available on 12 November; actual viewport, keyboard and account/form verification is in progress, with no pass yet claimed. Protected profile-image storage remains outstanding. The parent reviews every delivered milestone before a PR; the owner alone merges `main`.
+Status: Phase 2 in progress. Native trust, hosted onboarding/RLS/Storage, actual brand/creator onboarding and image-form browser checks passed on 12 November 2026. Fresh signup/password-reset need owner credential handoff; screenshot visual, physical-device, virtual-keyboard and zoom verification remain outstanding. The parent reviewed the source/security changes before the image milestone PR; the owner alone merges `main`.
 
 ## Development configuration
 
@@ -55,7 +55,7 @@ Verify at 360, 390, 768 and 1280 CSS px. Check touch navigation/account controls
 
 ## Storage and synchronization boundaries
 
-Avatar/logo upload is explicitly unavailable in this milestone; users can complete text/link profiles. Protected image buckets, type/size validation, object ownership/access, replacement cleanup, and real Storage policy tests remain Phase 2 work before uploads are enabled. Private collaboration attachments remain Phase 4 and need their separately agreed controls. No local file substitutes for storage are used.
+Optional avatar/logo upload is implemented on saved profiles in the next stacked Phase 2 milestone. It uses a private user-scoped bucket, one fixed object per active brand/creator, 5 MiB/16 MP input bounds, actual image decoding, WebP re-encoding and metadata removal. Authenticated delivery checks current object metadata and validates bytes again rather than trusting MIME or cached downloads. Hosted Storage and endpoint checks passed as recorded in [the image milestone](phase-2-profile-images.md); actual brand image-picker browser cases also passed, with fresh-signup/password-reset handoff and visual/device limits still outstanding. Text/link onboarding stays independent. Private collaboration attachments remain Phase 4. No local file substitutes or privileged keys are used for normal requests.
 
 Onboarding uses the current authenticated session directly and needs no account-sync webhook. Deletion/recovery, operational membership audits, and production lifecycle procedures must be finalized before inviting real users. If account-sync webhooks become necessary, add signature verification, deduplication and retry tests then; no unverified webhook endpoint exists now.
 

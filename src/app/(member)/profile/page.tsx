@@ -2,6 +2,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getIntegrationConfig } from "@/server/config";
 import { getOwnProfile } from "@/server/services/profile";
+import { getOwnProfileImageStatus } from "@/server/services/profile-image";
+import { ProfileImageForm } from "@/components/profile-image-form";
 
 export const metadata = { title: "Your profile" };
 
@@ -10,6 +12,7 @@ export default async function ProfilePage() {
   const { member, values, complete } = await getOwnProfile();
   if (member.role === "admin") redirect("/dashboard");
   if (!complete || !values) redirect("/onboarding");
+  const imageStatus = await getOwnProfileImageStatus();
   return (
     <>
       <span className="eyebrow">YOUR SAVED INTRODUCTION</span>
@@ -52,6 +55,10 @@ export default async function ProfilePage() {
       <Link className="action action-secondary" href="/onboarding">
         Update your introduction
       </Link>
+      <ProfileImageForm
+        currentStatus={imageStatus}
+        brand={member.role === "brand"}
+      />
     </>
   );
 }
