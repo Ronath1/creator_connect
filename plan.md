@@ -1,6 +1,6 @@
 # CreatorConnect — Phased Development Plan
 
-Status: Phase 0 accepted and complete. Earlier manual/visual/device gaps remain recorded. Phase 3 was reviewed and delivered in PR #5; Phase 4 was parent-reviewed and delivered in draft PR #6 with remaining browser checks blocked by current browser unavailability. Phase 5 readiness documentation is parent-reviewed and delivered in PR #7; hosting/deployment will be decided later. On 17 November the owner chose to finish Phase 4–5 verification first. Neither Phase 4 nor the deployed/observed Phase 5 pilot is complete. Phases 6–9 remain unauthorized.
+Status: Phase 0 accepted and complete. Phase 3 is delivered in PR #5; Phase 4 draft PR #6 retains unfinished browser checks; Phase 5 readiness is delivered in PR #7 without a deployed/observed pilot. On 17 November, after the verification access check, the owner explicitly instructed starting Phase 6. Payment provider/business-model discovery is now in progress while the earlier verification gaps remain open. Hosting/deployment and live transactions remain deferred; Phases 7–9 remain unauthorized.
 Updated: 17 November 2026.
 Product context: [brand-influencer-product-vision.md](brand-influencer-product-vision.md).
 Phase 0 proposal: [phase-0-pilot-scope.md](phase-0-pilot-scope.md).
@@ -44,7 +44,7 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 
 ## 3. How phase-by-phase work must proceed
 
-- Current position: Phase 4 parent review and draft PR #6 are delivered; its preserved browser journeys remain pending because browser access is unavailable. Phase 5 readiness documentation may proceed independently after that handoff under the owner's authorization. Fresh signup/password-reset handoff and physical-device/visual gaps remain recorded; do not describe an undeployed or unobserved pilot as complete.
+- Current position: Phase 4 draft PR #6 and Phase 5 readiness PR #7 are delivered; browser, credential/device and deployed-pilot evidence remain incomplete. The owner's latest 17 November instruction authorizes starting Phase 6, superseding the earlier request to finish verification first. Begin with actual provider eligibility and business decisions; never treat this reorder as completed pilot evidence or permission for live transactions.
 - Editing this plan does not authorize application development. Start implementation only when the owner explicitly instructs it.
 - Work within the approved phase. Do not silently add later-phase features or provision later-phase services.
 - At the start of a phase, review its prerequisites and resolve only the decisions needed for that phase. Future decisions may remain open.
@@ -67,7 +67,7 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 | 3 | Profiles, opportunity discovery, applications and selection | Phase 2; owner authorized continued development with recorded manual/device gaps | In progress — implementation/checks delivered, Ready for review |
 | 4 | Agreed work, discussions, submissions, approvals and admin support | Phase 3 parent review and PR | In progress — parent-reviewed draft PR #6; preserved browser checks pending access |
 | 5 | Verified Sri Lankan private pilot and feedback | Phase 4 and deployment readiness | In progress — readiness documentation only; Phase 4 checks and deployment/cohort remain outstanding |
-| 6 | Real payments with verified collection and payout behavior | Validated pilot and agreed provider/business rules | Not started |
+| 6 | Real payments with verified collection and payout behavior | Provider/business eligibility and rules; validated pilot before live release | In progress — owner authorized start 17 November; provider/model discovery, no payment integration yet |
 | 7 | Prioritized portfolios, integrations and reporting | Pilot feedback and feature-specific decisions | Not started |
 | 8 | Measured performance improvements, including Redis if justified | Operational measurements and a demonstrated bottleneck | Not started |
 | 9 | Deliberate expansion beyond Sri Lanka | Stable Sri Lankan operation and country-specific readiness | Not started |
@@ -316,6 +316,8 @@ Keep opportunity, application, collaboration, and payment states separate. Defin
 
 **Prerequisite:** Phase 5 validated; owner agrees payment/business rules and authorizes this phase. Provider selection and sandbox work precede live transactions.
 
+**Recorded reorder, 17 November:** the owner explicitly instructed “start the phase 6.” Phase 6 discovery and eligible-provider sandbox work may proceed while Phase 4–5 verification remains incomplete. This starts the phase; it does not select a provider, accept a money-flow/fee/refund model, establish merchant eligibility, complete the pilot or enable live transactions. Resolve actual provider/model requirements before implementation; keep existing pilot payment messaging non-transactional.
+
 **Work and provider requirements:**
 
 Provider: **not selected**. First assess providers that can support the actual Sri Lankan business entity, brand collection, creator payouts, settlement currencies, and intended marketplace model. Do not assume a standard checkout integration also supports marketplace payouts.
@@ -533,7 +535,19 @@ When phase work is authorized, append a short record for each phase:
 - 17 November verification resume: owner chose finishing Phase 4–5 before payment planning. Both the browser connector and native computer-use helper were checked and remain unavailable; reconnection was requested. Same-worker read-only triage found no necessary unperformed repository-only check. No suites were repeated, app files changed, runtimes started or service state mutated.
 - Retention: uncertain uploads become eligible after a 24-hour grace plus scheduling/retry delay, rather than a maximum 24-hour cleanup promise. Owner wording acceptance is required before invitations. Linked evidence/audit retains the pilot-end plus 90-day review proposal; no automatic destructive purge is added.
 - Validation: documentation formatting, local-link and whitespace checks only; no runtime/provider calls, deployment, backup/restore, performance measurement, invitations or feedback collection were performed by this milestone. The current full-suite/build and real scanner evidence belongs to Phase 4, not new Phase 5 execution.
-- Remaining: owner PR review, Phase 4 browser checks, all release gates and actual pilot observation/owner review. Phase 5 remains In progress; payments/Phase 6+ are unauthorized.
+- Remaining: owner PR review, Phase 4 browser checks, all release gates and actual pilot observation/owner review. Phase 5 remains In progress. Phase 6 was subsequently authorized to start on 17 November; live payments and Phases 7–9 remain deferred.
+
+### Phase 6 payment discovery — 17 November 2026
+
+- Status: **In progress — discovery milestone delivered in [PR #8](https://github.com/Ronath1/creator_connect/pull/8)** on `feat/phase-6-payment-discovery`, stacked on Phase 5 head `94020c8` / PR #7. Owner explicitly authorized the start after the earlier verification-access check; same phase worker retained. Parent independently reviewed the milestone; owner alone merges.
+- First milestone: primary-source provider eligibility and marketplace collection/payout evidence, owner decision register and integration/test prerequisites. Provider settlement to one merchant bank account is not proof of creator payout support. Provider remains unselected; confirmed funds-flow direction and unresolved business details are recorded below.
+- Discovery package delivered by the same worker and independently reviewed by the parent: [provider evidence and decision register](docs/phase-6-payment-discovery.md). Five candidates reviewed using official sources; no complete eligible integration is established. Confirmed owner choices below supersede earlier unknown-flow wording; legal seller/provider arrangement remains unresolved. Documentation-only validation and a separate PR precede the next integration milestone.
+- Validation: parent formatting/whitespace,39local targets with zero missing and exact configured-secret scan of four staged files passed. No app suite/build rerun for documentation-only changes. No provider contacted, account created, financial schema added or transaction processed. Phase6 remains incomplete.
+- Continued discovery within PR #8: verified conditional bank vendor-disbursement infrastructure (DFCC iConnect Full Version and ComBank Business bulk/API), plus Dialog Pay's separately issued full collection sandbox. These are inquiry leads, not selected or approved marketplace integrations. Individual-creator eligibility, full funds-flow permission and exact beneficiary/status/retry/sandbox contracts require a provider/bank response. A focused unsent inquiry is prepared; no outreach or provider actions are inferred from “continue.”
+- Confirmed customer scope: mainly Sri Lankan brands, including registered companies, individuals and informal/unregistered online or physical businesses. This describes brand customers, not CreatorConnect's own merchant entity; do not infer platform eligibility or impose a new customer registration requirement.
+- Confirmed payment direction: brand payments go through CreatorConnect to creators, with a configurable platform cut. Owner wants future commission variation by creator type/audience/follower amount and other reasons; detailed rate/formula policy is explicitly deferred. CreatorConnect's own registration is pending; no payment provider or merchant account exists, and the owner plans to create one later. Platform bank/merchant eligibility is not established.
+- Remaining decisions/dependencies: a provider that expressly supports the actual marketplace collection/onward payout model, seller/contract identity, applicable timing/refund/dispute rules, fee calculation/ownership/effective dates and later sandbox account/spec/credentials. Fee quote snapshots and prospective rate changes are a recommendation, not an accepted policy. No credentials or identity/bank documents in chat.
+- Earlier Phase 4–5 browser/device/pilot gaps remain; neither phase is marked complete. No financial schema, payment UI, SDK, account, provisioning, live charge or payout is introduced by the discovery milestone. Provider sandbox integration follows verified eligibility and the required business decisions; live release requires its separate gates and explicit authorization.
 
 ## Technical references
 
