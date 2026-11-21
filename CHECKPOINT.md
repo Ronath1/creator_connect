@@ -1,20 +1,22 @@
-# Current checkpoint — 16 November 2026
+# Current checkpoint — 17 November 2026
 
-Work resumed at the owner's explicit instruction. Current branch: `feat/phase-4-collaboration`, stacked on `feat/phase-3-marketplace` / [PR #5](https://github.com/Ronath1/creator_connect/pull/5). Last pushed checkpoint before today's documentation is `a6ac1e0`. Phase 4 implementation and source review are delivered; remaining browser verification prevents calling the phase complete. A draft Phase 4 PR is being prepared. The owner alone merges.
+Work resumed at the owner's explicit instruction. Current branch: `feat/phase-5-pilot-readiness` / [readiness PR #7](https://github.com/Ronath1/creator_connect/pull/7), stacked on `feat/phase-4-collaboration` / [draft PR #6](https://github.com/Ronath1/creator_connect/pull/6), whose head is `ad702fc`. Phase 4 is stacked on `feat/phase-3-marketplace` / [PR #5](https://github.com/Ronath1/creator_connect/pull/5). Phase 4 implementation and source review are delivered; remaining browser verification prevents calling the phase complete. The same worker delivered independent Phase 5 readiness documents and the parent reviewed all three plus README/plan changes. The owner alone merges.
 
 ## Authorization and ownership
 
 Reuse `/root/phase_worker` (requested GPT-6.1-sol, medium). Parent owns independent review, hosted changes, fixtures, commits/push and PRs. Finish Phases 3–4, then Phase 5 readiness with a separate reviewed PR. Hosting/deployment, production service provisioning, invitations, spending and Phases 6–9 remain deferred. Readiness documents are not a deployed or observed pilot.
 
+On 17 November the owner explicitly chose **finish Phase 4–5 verification first**, rather than starting Phase 6 payment planning. The same worker completed a bounded read-only gap triage: no necessary unperformed repository-only verification remains. Continue existing UI journeys once access is restored; do not repeat passing suites as a substitute for browser/device or deployment evidence.
+
 The owner requested checkpoint-and-pause at 5% remaining credit, then continuation after reset to 100%. Tools cannot observe this meter. Pause immediately on an owner signal; elapsed time does not establish a reset. The 16 November resume supersedes the historical pause.
 
 ## Current runtime and browser boundary
 
-Today's final source checks and production rebuild passed. Parent then started production server12383 and portable ClamAV42687 for live checks; both are now stopped for the draft handoff. No development server is running. Never build/typegen concurrently with the production QA server.
+On 16 November final source checks and production rebuild passed. Parent then started production server12383 and portable ClamAV42687 for live checks; both were stopped for the draft handoff. No runtime was started or service state changed during the 17 November access check. Never build/typegen concurrently with the production QA server.
 
 Both owned DEV cron jobs are now disabled: `creatorconnect-collaboration-tick` (30 seconds) and `creatorconnect-collaboration-job-history` (17 3 * * *). All five scoped synthetic memberships are suspended; housekeeping found zero active Clerk sessions across all six identities. This is controlled fixture/runtime cleanup, not a new owner pause.
 
-On 16 November CUA inventory returned no apps or browsers; opening IAB returned “Browser is not available: iab.” Browser/plugin discovery did not restore a local browser. A question about reconnecting versus publishing with checks pending was sent; no answer received at this checkpoint. Prepare a draft with these limits explicit. Do not use backend mutations to pretend the unfinished browser journey passed.
+Browser access was rechecked on 17 November: CUA inventory returned no apps or browsers, and creating IAB returned “Browser is not available: iab.” The available computer-use skill was read, its supported `@oai/sky` initialization succeeded, but `list_apps` returned “Computer Use native pipe is unavailable” / OS error2. Parent asked the owner to reconnect browser or computer-use access and reply ready; that dependency is pending. Phase4 draft PR #6 already records the unfinished evidence. Do not use backend mutations to pretend the browser journey passed.
 
 Portable ClamAV root: `C:/Users/ronat/AppData/Local/Temp/creatorconnect-clamav-qa-20261113`, binary under `runtime/clamav-1.5.4.win.x64`. Official archive digest verified; no OS service/security changes. FreshClam completed successfully on 16 November. Start only when needed on loopback127.0.0.1:3310 with child TZ=UTC, encrypted/scan-limit alerts enabled and limits covering10MiB. App requires definitions no older than48 hours. Production scanner/cleanup supervision remains deferred.
 
@@ -100,6 +102,6 @@ Parent harnesses are outside Git under `C:/Users/ronat/AppData/Local/Temp/`, pre
 
 ## Next steps
 
-1. Finish draft Phase4 review record, staged secret scan, commit/push and PR stacked on#5, explicitly retaining incomplete browser status. No merge.
-2. Reuse the same worker for Phase5 readiness material on a new stacked branch, with independent parent review and separate PR. Do not mark the pilot complete.
+1. Draft Phase4 PR #6 is open and CLEAN/MERGEABLE, with incomplete browser status explicit. Five changed documentation files passed exact configured-secret scan; source checks remain as recorded above. No merge.
+2. Phase5 readiness material is delivered and parent-reviewed in PR #7: [release gates](docs/phase-5-readiness.md), [verification/measurement/feedback](docs/phase-5-verification.md), [operations/incident/restore](docs/phase-5-operations.md), plus README/plan links. Parent formatting/whitespace checks,45local targets with zero missing and exact configured-secret scan of all six staged files passed. Initial milestone commit is3af69dd; subsequent checkpoint metadata is on the same branch. No app/schema/dependency changes or live service actions; the app suite/build were not repeated for this documentation-only milestone. Phase5 itself remains incomplete. No code was merged.
 3. When a browser is available, deliberately reactivate only these fixtures/jobs, refresh scanner definitions, start the existing production build and continue the preserved journeys. Keep actual device/release gaps explicit.
