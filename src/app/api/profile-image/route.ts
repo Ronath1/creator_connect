@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { unstable_rethrow } from "next/navigation";
 import { getIntegrationConfig } from "@/server/config";
 import { loadMembership } from "@/server/services/membership";
+import { uuid } from "@/lib/marketplace";
 import {
   PROFILE_IMAGE_BUCKET,
   profileImagePath,
@@ -28,16 +29,30 @@ function unavailable(status: number) {
   });
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   if (!getIntegrationConfig()) return unavailable(503);
   try {
     // API requests receive status codes, never an image redirecting to auth HTML.
     if (!(await auth()).userId) return unavailable(401);
     const { member, client } = await loadMembership();
-    if (!member || member.status !== "active" || member.role === "admin")
+    const target = new URL(request.url).searchParams.get("member");
+    if (
+      !member ||
+      member.status !== "active" ||
+      (!target && member.role === "admin")
+    )
       return unavailable(403);
+    if (target) {
+      if (!uuid.safeParse(target).success) return unavailable(404);
+      const visible = await client
+        .rpc("member_profile", { p_id: target })
+        .abortSignal(AbortSignal.timeout(15_000));
+      if (visible.error)
+        return unavailable(visible.error.code === "42501" ? 403 : 503);
+      if (!visible.data) return unavailable(404);
+    }
     const storage = client.storage.from(PROFILE_IMAGE_BUCKET);
-    const path = profileImagePath(member.id);
+    const path = profileImagePath(target ?? member.id);
     // Metadata is authoritative for current existence; a cached byte response
     // must not resurrect a deleted object. A version nonce also separates replacements.
     const current = await storage.info(path);

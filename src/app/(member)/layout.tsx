@@ -34,6 +34,13 @@ export default async function MemberLayout({
         {member.role !== "admin" ? (
           <Link href="/profile">Your profile</Link>
         ) : null}
+        <Link href="/opportunities">Discover opportunities</Link>
+        {member.role === "brand" ? (
+          <Link href="/my-opportunities">My opportunities</Link>
+        ) : null}
+        {member.role === "influencer" ? (
+          <Link href="/applications">My applications</Link>
+        ) : null}
         <Link href="/">Introduction</Link>
       </nav>
       <div className="member-content">{children}</div>

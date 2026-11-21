@@ -1394,3 +1394,130 @@ h3 {
   opacity: 0.65;
   cursor: wait;
 }
+.market-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 24px;
+  margin-block: 28px;
+}
+.market-material {
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 24px;
+}
+.market-material > legend {
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.market-card {
+  background: #fff;
+  border: 1px solid var(--border, #d8e0e6);
+  border-radius: 16px;
+  padding: 24px;
+  min-width: 0;
+  margin-block: 24px;
+  overflow-wrap: anywhere;
+}
+.market-grid .market-card {
+  margin: 0;
+}
+.market-card h2,
+.market-card h3 {
+  margin-block: 16px 12px;
+}
+.market-card p {
+  margin-block: 12px;
+  line-height: 1.65;
+}
+.market-card li {
+  margin-block: 14px;
+}
+.market-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-block: 20px;
+}
+.market-action {
+  min-width: 0;
+  max-width: 100%;
+}
+.market-action .action {
+  white-space: normal;
+}
+.market-action p {
+  max-width: 48ch;
+}
+.market-filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+  margin-block: 28px;
+}
+.market-filters > .action {
+  justify-self: start;
+}
+.market-title {
+  margin-block: 24px;
+}
+.market-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 20px;
+  margin-block: 24px;
+}
+.market-facts dt {
+  font-size: 14px;
+  color: #485e68;
+}
+.market-facts dd {
+  margin: 8px 0 0;
+  font-weight: 600;
+}
+.market-card summary {
+  min-height: 44px;
+  cursor: pointer;
+  padding-block: 12px;
+  line-height: 1.6;
+}
+.preserve-lines {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.member-avatar,
+.member-avatar-fallback {
+  width: 96px;
+  height: 96px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+.member-avatar-fallback {
+  display: grid;
+  place-items: center;
+  background: #edf3ee;
+  color: #172b3a;
+  font-size: 32px;
+}
+@media (max-width: 640px) {
+  .market-filters {
+    grid-template-columns: 1fr;
+  }
+  .market-card {
+    padding: 20px 16px;
+  }
+  .market-actions {
+    align-items: stretch;
+  }
+  .market-actions > .action,
+  .market-actions > .market-action,
+  .market-action > .action {
+    width: 100%;
+  }
+  .market-actions > .form-help {
+    width: 100%;
+  }
+}
