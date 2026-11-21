@@ -1,7 +1,7 @@
 # CreatorConnect — Phased Development Plan
 
-Status: Phase 0 accepted and complete. Phase 3 is delivered in PR #5; Phase 4 draft PR #6 retains unfinished browser checks; Phase 5 readiness is delivered in PR #7 without a deployed/observed pilot. On 17 November, after the verification access check, the owner explicitly instructed starting Phase 6. Payment provider/business-model discovery is now in progress while the earlier verification gaps remain open. Hosting/deployment and live transactions remain deferred; Phases 7–9 remain unauthorized.
-Updated: 17 November 2026.
+Status: Phase 0 accepted and complete. Phase 4–5 browser/device/deployed-pilot gaps remain open. Phase 6 research is delivered in PR #8; payment integration remains pending provider approval/specification and sandbox access. On 21 November the owner explicitly selected starting Phase 7 creator portfolios while keeping Phase 6 pending. Hosting/deployment, live transactions and Phases 8–9 remain deferred. Feature-branch PR merges do not imply integration into main.
+Updated: 21 November 2026.
 Product context: [brand-influencer-product-vision.md](brand-influencer-product-vision.md).
 Phase 0 proposal: [phase-0-pilot-scope.md](phase-0-pilot-scope.md).
 
@@ -44,7 +44,7 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 
 ## 3. How phase-by-phase work must proceed
 
-- Current position: Phase 4 draft PR #6 and Phase 5 readiness PR #7 are delivered; browser, credential/device and deployed-pilot evidence remain incomplete. The owner's latest 17 November instruction authorizes starting Phase 6, superseding the earlier request to finish verification first. Begin with actual provider eligibility and business decisions; never treat this reorder as completed pilot evidence or permission for live transactions.
+- Current position: on 21 November the owner selected Phase 7 creator portfolios independently while Phase 6 remains pending. Earlier browser, credential/device and deployed-pilot evidence remains incomplete. This reorder does not complete earlier phases or authorize live transactions, deployment or other growth features.
 - Editing this plan does not authorize application development. Start implementation only when the owner explicitly instructs it.
 - Work within the approved phase. Do not silently add later-phase features or provision later-phase services.
 - At the start of a phase, review its prerequisites and resolve only the decisions needed for that phase. Future decisions may remain open.
@@ -68,7 +68,7 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 | 4 | Agreed work, discussions, submissions, approvals and admin support | Phase 3 parent review and PR | In progress — parent-reviewed draft PR #6; preserved browser checks pending access |
 | 5 | Verified Sri Lankan private pilot and feedback | Phase 4 and deployment readiness | In progress — readiness documentation only; Phase 4 checks and deployment/cohort remain outstanding |
 | 6 | Real payments with verified collection and payout behavior | Provider/business eligibility and rules; validated pilot before live release | In progress — owner authorized start 17 November; provider/model discovery, no payment integration yet |
-| 7 | Prioritized portfolios, integrations and reporting | Pilot feedback and feature-specific decisions | Not started |
+| 7 | Prioritized portfolios, integrations and reporting | Owner selected creator portfolios on 21 November; payments stay pending | In progress — explicit opt-in public creator portfolio milestone only |
 | 8 | Measured performance improvements, including Redis if justified | Operational measurements and a demonstrated bottleneck | Not started |
 | 9 | Deliberate expansion beyond Sri Lanka | Stable Sri Lankan operation and country-specific readiness | Not started |
 
@@ -350,6 +350,8 @@ Implementation requirements for that milestone:
 
 **Prerequisite:** Phase 5 findings and owner-selected feature scope. Phase 6 is required only for features that depend on live payments.
 
+**Recorded scope/reorder, 21 November:** owner selected “Start Phase 7 creator portfolios; keep Phase 6 pending.” Implement a simple creator-curated public portfolio, unpublished by default, with protected editor, private draft/preview, explicit publish consent and withdrawal. This is independent of payments and does not mark the pilot complete. Initial fields are chosen public name, headline, about and up to six HTTPS work links. No avatar/files, private profile auto-publication, collaboration evidence import, follower/verified metrics, public directory, site builder, OAuth, notifications provider or analytics are included. Only publish owner-selected content through a separate safe projection; current membership/creator eligibility and publication must be rechecked for anonymous delivery.
+
 **Work:**
 
 - Prioritize a simple public influencer portfolio; separately decide whether a fuller website builder is justified.
@@ -548,6 +550,15 @@ When phase work is authorized, append a short record for each phase:
 - Confirmed payment direction: brand payments go through CreatorConnect to creators, with a configurable platform cut. Owner wants future commission variation by creator type/audience/follower amount and other reasons; detailed rate/formula policy is explicitly deferred. CreatorConnect's own registration is pending; no payment provider or merchant account exists, and the owner plans to create one later. Platform bank/merchant eligibility is not established.
 - Remaining decisions/dependencies: a provider that expressly supports the actual marketplace collection/onward payout model, seller/contract identity, applicable timing/refund/dispute rules, fee calculation/ownership/effective dates and later sandbox account/spec/credentials. Fee quote snapshots and prospective rate changes are a recommendation, not an accepted policy. No credentials or identity/bank documents in chat.
 - Earlier Phase 4–5 browser/device/pilot gaps remain; neither phase is marked complete. No financial schema, payment UI, SDK, account, provisioning, live charge or payout is introduced by the discovery milestone. Provider sandbox integration follows verified eligibility and the required business decisions; live release requires its separate gates and explicit authorization.
+
+### Phase 7 creator portfolios — 21 November 2026
+
+- Status: **In progress — source parent-reviewed and delivered in [draft PR #9](https://github.com/Ronath1/creator_connect/pull/9)** on `feat/phase-7-creator-portfolios`, based on `origin/feat/phase-5-pilot-readiness` (`d110b84`, which contains owner-merged Phase 6 discovery). Same implementation worker retained; parent owns independent review, hosted changes, generated types, fixtures and PR.
+- Confirmed feature scope is the nonpayment portfolio milestone above. Draft saves must not alter an existing public snapshot. Public share URLs use a chosen unique slug, locked after first publication; published DTO excludes internal user/Clerk identifiers, drafts, contacts, private profiles and files. Unpublished/suspended/ineligible portfolios are unavailable; no shared caching or automatic indexing is intended.
+- Repository state checked 21 November: PRs #4/#5/#7/#8 were merged into their respective feature bases; #2/#3/#6 remain open and `main` still contains Phase 0. Preserve the owner-only merge rule; do not represent these feature-base merges as a production release.
+- Delivered: protected creator draft editor/private saved preview, explicit publication consent/withdrawal, safe anonymous share page, snapshot isolation, permanent slug after publication and revision conflicts. See [portfolio evidence](docs/phase-7-portfolios.md). Parent reviewed the implementation and applied immutable DEV migration `20261121143350_phase_7_creator_portfolios.sql`; actual types, exact ACL/RLS/executor restrictions and empty security advisors verified.
+- Checks21November:91tests (90passed,1opt-in scanner skip), zero-warning lint, formatting, generated routes/strict types and build passed. Parent SQL10/10, native Clerk-JWT and production HTTP publication/privacy/revocation/suspension checks passed. Next streamed not-found may be HTTP200 with no portfolio data and no-store/noindex; no guarantee of literal404 is claimed. Test portfolio withdrawn, five scoped members suspended, no active sessions, owned runtimes/jobs stopped.
+- Remaining: actual editor/preview/publish/unpublish browser interaction, rendered phone/screenshot/device/keyboard/zoom checks and owner draft PR review. All19stagedfiles passed exact configured-secret scan;37local links have zero missing targets. Phase7 remains In progress. Phase6 provider dependencies and earlier Phase4–5 browser/device/release gaps remain open. No Phase8 authorization.
 
 ## Technical references
 

@@ -65,6 +65,10 @@ Private attachments require the separately configured server-only worker key and
 
 ## Verification and handoff
 
+The owner authorized the [Phase 7 creator portfolio milestone](docs/phase-7-portfolios.md) while payment integration waits for provider access. Creators can keep separate drafts, preview, explicitly publish a curated public snapshot and unpublish it. No private profile/evidence is imported, no files or metrics are published, and no payment behavior changes. Browser verification and earlier release gaps remain explicit.
+
+Portfolio checks on 21 November passed: 90 tests with one opt-in scanner skip, lint/format/types/build, hosted JWT/RLS and anonymous HTTP allowlist/no-store/noindex checks. Unpublish and suspension removed public identity/work access; Next returned a streamed not-found page with HTTP200 after streaming began, so no literal HTTP404 pass is claimed. Synthetic portfolios are unpublished, test memberships suspended and sessions/runtimes stopped. Parent source review is complete; actual editor/preview browser and mobile visual checks remain pending, so the milestone is not complete.
+
 The owner authorized [Phase 6 payment discovery](docs/phase-6-payment-discovery.md); the owner confirmed brand-to-platform-to-creator flow with a configurable platform cut, while detailed commission policy is deferred. Platform registration is pending and no eligible provider or merchant/sandbox account is selected. This research does not enable transactions or change the nonpayment pilot. Phase 4/5 verification and release gaps remain open.
 
 The reviewed Phase 5 readiness package is delivered in [PR #7](https://github.com/Ronath1/creator_connect/pull/7); the actual pilot remains incomplete and undeployed. Use the [release gates](docs/phase-5-readiness.md), [verification/measurement/feedback record](docs/phase-5-verification.md) and [operations/restore runbook](docs/phase-5-operations.md). Phase 4's unfinished browser journeys and earlier manual/device gaps remain blockers; hosting, recovery evidence, owner support/privacy decisions and real cohort observation are still deferred.

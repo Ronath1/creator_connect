@@ -42,6 +42,11 @@ export default async function MemberLayout({
         {member.role === "influencer" ? (
           <Link href="/applications">My applications</Link>
         ) : null}
+        {member.role === "influencer" ? (
+          <Link href="/portfolio" prefetch={false}>
+            Your portfolio
+          </Link>
+        ) : null}
         {member.role !== "admin" ? (
           <Link href="/collaborations">Collaborations</Link>
         ) : (
