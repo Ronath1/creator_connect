@@ -1,6 +1,6 @@
 # Phase 8 local performance baseline
 
-Status: **In progress — measurement-first tooling milestone, 23 November 2026**. The owner allowed development to proceed while browser checks remain deferred; that is a sequencing exception, not a permanent waiver or a browser/mobile pass. Phase 4/7 interactive verification and Phase 5 release/device gates remain open. Phase 6 waits on actual payment-provider eligibility/specification/account access. No Redis, infrastructure purchase, schema/index/RLS/cache change or Phase 9 work is introduced.
+Status: **In progress — baseline tooling milestone parent-reviewed in [PR #10](https://github.com/Ronath1/creator_connect/pull/10), 23 November 2026**. The owner allowed development to proceed while browser checks remain deferred; that is a sequencing exception, not a permanent waiver or a browser/mobile pass. Phase 4/7 interactive verification and Phase 5 release/device gates remain open. Phase 6 waits on actual payment-provider eligibility/specification/account access. No Redis, infrastructure purchase, schema/index/RLS/cache change or Phase 9 work is introduced.
 
 ## Reproduce a bounded local HTTP sample
 

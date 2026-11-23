@@ -1,6 +1,6 @@
 # Current checkpoint — 23 November 2026
 
-Current branch: `feat/phase-8-performance-baseline`, based on Phase 7 checkpoint `1d9d698` / [draft PR #9](https://github.com/Ronath1/creator_connect/pull/9). Phase 7 is based on owner-merged Phase 5 branch `d110b84` (tree equivalent to Phase 6 checkpoint `5b15ec5`). PRs #4/#5/#7/#8 were merged into feature-branch bases, not main; #2/#3/#6/#9 remain open. Main still contains Phase 0. Phase 6 payment integration and Phase 4–5/7 verification/release gaps remain open. The owner alone merges.
+Current branch: `feat/phase-8-performance-baseline` / [PR #10](https://github.com/Ronath1/creator_connect/pull/10), based on Phase 7 checkpoint `1d9d698` / [draft PR #9](https://github.com/Ronath1/creator_connect/pull/9). Initial baseline commit is `9915347`; final checkpoint metadata follows on the same branch. Phase 7 is based on owner-merged Phase 5 branch `d110b84` (tree equivalent to Phase 6 checkpoint `5b15ec5`). PRs #4/#5/#7/#8 were merged into feature-branch bases, not main; #2/#3/#6/#9/#10 remain open. Main still contains Phase 0. Phase 6 payment integration and Phase 4–5/7 verification/release gaps remain open. The owner alone merges.
 
 ## Authorization and ownership
 
@@ -8,7 +8,7 @@ Reuse `/root/phase_worker` (requested GPT-6.1-sol, medium). Parent owns independ
 
 ## Active Phase 8 milestone
 
-The same worker is adding a bounded anonymous localhost HTTP baseline CLI, npm command and performance document. Parent owns aggregate read-only DEV database observations, real CLI runs, plan/checkpoint, independent review and a separate stacked PR. No app/schema/dependency change, data seeding, account action or paid service is planned. The accepted representative workload remains unexecuted: 10 distinct sessions, aggregate 2 requests/second for 15 minutes, with 50 profiles, 100 opportunities, 500 applications, 50 collaborations and 2,000 messages.
+The same worker delivered a bounded anonymous localhost HTTP baseline CLI, npm command and performance document. Parent independently reviewed the milestone and published PR #10, stacked on Phase 7 PR #9. It is ready for owner review; no merge. Parent owns aggregate read-only DEV database observations, real CLI runs and plan/checkpoint. No app/schema/dependency change, data seeding, account action or paid service was introduced. The accepted representative workload remains unexecuted: 10 distinct sessions, aggregate 2 requests/second for 15 minutes, with 50 profiles, 100 opportunities, 500 applications, 50 collaborations and 2,000 messages.
 
 Fresh DEV observations on 23 November: estimated rows are 5 users, 9 opportunities, 11 applications, 8 collaborations, 3 messages, 75 marketplace events and 1 portfolio. Snapshot has 7 connections (1 active, including observer) against configured maximum 60. Performance advisors report 4 existing auth RLS initplan warnings, 14 unindexed foreign-key notices and 19 unused-index notices; these are not demonstrated application bottlenecks. One bounded EXPLAIN of the unpublished public portfolio function showed only its Result wrapper, 0.054 ms planning / 25.460 ms execution, 668 shared hits and zero reads. This administrative observer measurement exposes no nested plan and establishes no application p95. No statistics reset, settings, grants or schema changes were made.
 
@@ -142,7 +142,7 @@ Parent harnesses are outside Git under `C:/Users/ronat/AppData/Local/Temp/`, pre
 
 ## Next steps
 
-1. Complete the current Phase 8 baseline review and separate PR from `feat/phase-8-performance-baseline`, stacked on Phase 7 PR #9. Record actual bounded HTTP results and CLI failure-path checks; do not infer browser, server-only latency or representative capacity. No demonstrated scaling bottleneck is established. Phase 9 is not authorized.
+1. Phase 8 baseline milestone is parent-reviewed and delivered in PR #10 for owner review. Formatting, 42 local file targets with zero missing, staged whitespace and an exact configured-secret scan of all six changed files passed. Keep remaining representative workload/server metrics/browser/cost evidence explicit; no measured scaling change is justified and Phase 8 is not complete. Do not infer browser or representative capacity from the local GET sample. Phase 9 is not authorized.
 2. Phase 6 discovery PR #8 was owner-merged into the Phase 5 feature branch. Owner/provider setup and an approved marketplace collection/payout product remain necessary for real sandbox integration. Detailed commission policy stays deferred per owner; no fee formula or rate was invented. No live transactions.
 3. Draft Phase 4 PR #6 and Phase 7 PR #9 remain open, with incomplete browser status explicit. Prior source/hosted checks remain as recorded above. The owner alone merges.
 4. Phase 5 readiness material is delivered and parent-reviewed in owner-merged feature-base PR #7: [release gates](docs/phase-5-readiness.md), [verification/measurement/feedback](docs/phase-5-verification.md), [operations/incident/restore](docs/phase-5-operations.md). Initial milestone commit is `3af69dd`; Phase 5 itself remains incomplete. These merges did not update main or launch a pilot.
