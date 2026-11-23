@@ -65,6 +65,8 @@ Private attachments require the separately configured server-only worker key and
 
 ## Verification and handoff
 
+The [Phase 8 local baseline](docs/phase-8-performance.md) provides `npm run perf:baseline -- --help`: bounded anonymous localhost GET timings, without seeding, credentials or writes. It does not establish server-only p95, browser performance or representative capacity; no Redis/index/cache change is justified by the current tiny development dataset.
+
 The owner authorized the [Phase 7 creator portfolio milestone](docs/phase-7-portfolios.md) while payment integration waits for provider access. Creators can keep separate drafts, preview, explicitly publish a curated public snapshot and unpublish it. No private profile/evidence is imported, no files or metrics are published, and no payment behavior changes. Browser verification and earlier release gaps remain explicit.
 
 Portfolio checks on 21 November passed: 90 tests with one opt-in scanner skip, lint/format/types/build, hosted JWT/RLS and anonymous HTTP allowlist/no-store/noindex checks. Unpublish and suspension removed public identity/work access; Next returned a streamed not-found page with HTTP200 after streaming began, so no literal HTTP404 pass is claimed. Synthetic portfolios are unpublished, test memberships suspended and sessions/runtimes stopped. Parent source review is complete; actual editor/preview browser and mobile visual checks remain pending, so the milestone is not complete.
