@@ -1,7 +1,7 @@
 # CreatorConnect — Phased Development Plan
 
-Status: Phase 0 accepted and complete. Phase 4–5 browser/device/deployed-pilot gaps remain open. Phase 6 research is delivered in PR #8; payment integration remains pending provider approval/specification and sandbox access. On 21 November the owner explicitly selected starting Phase 7 creator portfolios while keeping Phase 6 pending. Hosting/deployment, live transactions and Phases 8–9 remain deferred. Feature-branch PR merges do not imply integration into main.
-Updated: 21 November 2026.
+Status: Phase 0 accepted and complete. Phase 4–5 browser/device/deployed-pilot gaps remain open. Phase 6 research is delivered in PR #8; payment integration remains pending provider approval/specification and sandbox access. Phase 7 creator portfolios are source-reviewed in draft PR #9, with interactive browser/mobile checks outstanding. On 23 November the owner deferred those checks for continued development and authorized starting Phase 8 with a measurement baseline. Hosting/deployment, live transactions and Phase 9 remain deferred. Feature-branch PR merges do not imply integration into main.
+Updated: 23 November 2026.
 Product context: [brand-influencer-product-vision.md](brand-influencer-product-vision.md).
 Phase 0 proposal: [phase-0-pilot-scope.md](phase-0-pilot-scope.md).
 
@@ -44,7 +44,7 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 
 ## 3. How phase-by-phase work must proceed
 
-- Current position: on 21 November the owner selected Phase 7 creator portfolios independently while Phase 6 remains pending. Earlier browser, credential/device and deployed-pilot evidence remains incomplete. This reorder does not complete earlier phases or authorize live transactions, deployment or other growth features.
+- Current position: on 23 November the owner chose continuing to the next phase while deferring portfolio/browser checks. Start Phase 8 with a bounded local HTTP and development-database baseline; choose changes only if measurements justify them. Phase 7 and earlier browser, credential/device and deployed-pilot evidence remain incomplete and required before release. Phase 6 provider dependencies remain pending. This reorder does not complete earlier phases or authorize live transactions, deployment or Phase 9.
 - Editing this plan does not authorize application development. Start implementation only when the owner explicitly instructs it.
 - Work within the approved phase. Do not silently add later-phase features or provision later-phase services.
 - At the start of a phase, review its prerequisites and resolve only the decisions needed for that phase. Future decisions may remain open.
@@ -69,7 +69,7 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 | 5 | Verified Sri Lankan private pilot and feedback | Phase 4 and deployment readiness | In progress — readiness documentation only; Phase 4 checks and deployment/cohort remain outstanding |
 | 6 | Real payments with verified collection and payout behavior | Provider/business eligibility and rules; validated pilot before live release | In progress — owner authorized start 17 November; provider/model discovery, no payment integration yet |
 | 7 | Prioritized portfolios, integrations and reporting | Owner selected creator portfolios on 21 November; payments stay pending | In progress — explicit opt-in public creator portfolio milestone only |
-| 8 | Measured performance improvements, including Redis if justified | Operational measurements and a demonstrated bottleneck | Not started |
+| 8 | Measured performance improvements, including Redis if justified | Measurement baseline first; a demonstrated bottleneck before scaling changes | In progress — owner authorized baseline on 23 November; representative load remains unverified |
 | 9 | Deliberate expansion beyond Sri Lanka | Stable Sri Lankan operation and country-specific readiness | Not started |
 
 Phases 0–6 form the default delivery sequence. Phases 7–9 are conditional follow-on work, not mandatory launch requirements. Phase 7 may follow Phase 5 independently of payments; Phase 8 may be brought forward when measurements justify it. Record any approved reorder and its dependencies before starting that work. Baseline scalability and security requirements apply from the beginning.
@@ -558,7 +558,15 @@ When phase work is authorized, append a short record for each phase:
 - Repository state checked 21 November: PRs #4/#5/#7/#8 were merged into their respective feature bases; #2/#3/#6 remain open and `main` still contains Phase 0. Preserve the owner-only merge rule; do not represent these feature-base merges as a production release.
 - Delivered: protected creator draft editor/private saved preview, explicit publication consent/withdrawal, safe anonymous share page, snapshot isolation, permanent slug after publication and revision conflicts. See [portfolio evidence](docs/phase-7-portfolios.md). Parent reviewed the implementation and applied immutable DEV migration `20261121143350_phase_7_creator_portfolios.sql`; actual types, exact ACL/RLS/executor restrictions and empty security advisors verified.
 - Checks21November:91tests (90passed,1opt-in scanner skip), zero-warning lint, formatting, generated routes/strict types and build passed. Parent SQL10/10, native Clerk-JWT and production HTTP publication/privacy/revocation/suspension checks passed. Next streamed not-found may be HTTP200 with no portfolio data and no-store/noindex; no guarantee of literal404 is claimed. Test portfolio withdrawn, five scoped members suspended, no active sessions, owned runtimes/jobs stopped.
-- Remaining: actual editor/preview/publish/unpublish browser interaction, rendered phone/screenshot/device/keyboard/zoom checks and owner draft PR review. All19stagedfiles passed exact configured-secret scan;37local links have zero missing targets. Phase7 remains In progress. Phase6 provider dependencies and earlier Phase4–5 browser/device/release gaps remain open. No Phase8 authorization.
+- Remaining: actual editor/preview/publish/unpublish browser interaction, rendered phone/screenshot/device/keyboard/zoom checks and owner draft PR review. All19stagedfiles passed exact configured-secret scan;37local links have zero missing targets. Phase7 remains In progress. Phase6 provider dependencies and earlier Phase4–5 browser/device/release gaps remain open. On 23 November the owner deferred browser checks for continued development and authorized the Phase 8 baseline below; the release checks remain required.
+
+### Phase 8 performance baseline — 23 November 2026
+
+- Status: **In progress** on `feat/phase-8-performance-baseline`, based on Phase 7 checkpoint `1d9d698` / draft PR #9. The same implementation worker is retained; parent review and a separate PR precede handoff. Owner alone merges.
+- Scope: a bounded anonymous localhost HTTP measurement tool and read-only development database observations, documented in [performance baseline](docs/phase-8-performance.md). No scaling service, cache, dependency, application behavior or schema change is justified merely by starting the phase.
+- Ordering: portfolio/browser verification is deferred for continued development, not passed or removed from release gates. Brave is connected, but page control fails internally before navigation; no browser journey or phone measurement is inferred from HTTP requests.
+- Evidence: the parent-reviewed CLI completed 24 anonymous machine GETs (10 measured plus two warmups per target) at aggregate 1 request/second. All drained HTTP 200 with no transport failures; root measured p95 was 12.25 ms and the unpublished portfolio's unavailable page 263.90 ms. Its 1,543.14 ms warmup is preserved. Seven independent CLI failure-path groups, syntax, targeted lint/format and document checks passed. These tiny local observations justify no scaling change and establish no representative capacity or server-only latency target. No app suite/build rerun for tooling/documentation only.
+- Remaining: representative authenticated workload and agreed dataset, server-only latency/error measurements, browser web vitals/device checks, production connection/storage/cost evidence and any change-specific privacy/outage/retry verification. The tiny synthetic development dataset cannot establish pilot capacity. Phase 8 is not marked complete; deployment, spending and Phase 9 remain deferred.
 
 ## Technical references
 
