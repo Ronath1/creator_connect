@@ -1,7 +1,7 @@
 # CreatorConnect — Phased Development Plan
 
 Status: Phase 0 accepted and complete. Phase 4–5 browser/device/deployed-pilot gaps remain open. Phase 6 research is delivered in PR #8; payment integration remains pending provider approval/specification and sandbox access. Phase 7 creator portfolios are source-reviewed in draft PR #9, with interactive browser/mobile checks outstanding. On 23 November the owner deferred those checks for continued development and authorized starting Phase 8 with a measurement baseline. Hosting/deployment, live transactions and Phase 9 remain deferred. Feature-branch PR merges do not imply integration into main.
-Updated: 23 November 2026.
+Updated: 26 November 2026.
 Product context: [brand-influencer-product-vision.md](brand-influencer-product-vision.md).
 Phase 0 proposal: [phase-0-pilot-scope.md](phase-0-pilot-scope.md).
 
@@ -44,7 +44,7 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 
 ## 3. How phase-by-phase work must proceed
 
-- Current position: on 23 November the owner chose continuing to the next phase while deferring portfolio/browser checks. Start Phase 8 with a bounded local HTTP and development-database baseline; choose changes only if measurements justify them. Phase 7 and earlier browser, credential/device and deployed-pilot evidence remain incomplete and required before release. Phase 6 provider dependencies remain pending. This reorder does not complete earlier phases or authorize live transactions, deployment or Phase 9.
+- Current position: on 26 November the owner requested completing the current phase before moving to the next, then explicitly deferred real authenticated load testing until later so independent development can continue. The owner subsequently confirmed “Keep Sri Lanka focus; defer Phase 9.” Phase 8 remains in progress for full verification: the local HTTP baseline is delivered in PR #10, and the disposable SQL/RLS dataset diagnostic is parent-reviewed. Isolated load-target selection is deferred with the test; the existing DEV project must not receive that load without separate coordination. Phase 7 and earlier browser, credential/device and deployed-pilot evidence remain incomplete and required before release. Phase 6 provider dependencies remain pending. No international implementation, live rollout, provisioning or spending is implied.
 - Editing this plan does not authorize application development. Start implementation only when the owner explicitly instructs it.
 - Work within the approved phase. Do not silently add later-phase features or provision later-phase services.
 - At the start of a phase, review its prerequisites and resolve only the decisions needed for that phase. Future decisions may remain open.
@@ -70,7 +70,7 @@ The [accepted Phase 0 scope](phase-0-pilot-scope.md) records cohort, budget, and
 | 6 | Real payments with verified collection and payout behavior | Provider/business eligibility and rules; validated pilot before live release | In progress — owner authorized start 17 November; provider/model discovery, no payment integration yet |
 | 7 | Prioritized portfolios, integrations and reporting | Owner selected creator portfolios on 21 November; payments stay pending | In progress — explicit opt-in public creator portfolio milestone only |
 | 8 | Measured performance improvements, including Redis if justified | Measurement baseline first; a demonstrated bottleneck before scaling changes | In progress — owner authorized baseline on 23 November; representative load remains unverified |
-| 9 | Deliberate expansion beyond Sri Lanka | Stable Sri Lankan operation and country-specific readiness | Not started |
+| 9 | Deliberate expansion beyond Sri Lanka | Stable Sri Lankan operation and country-specific readiness | Not started — owner explicitly deferred on 26 November; keep Sri Lanka focus |
 
 Phases 0–6 form the default delivery sequence. Phases 7–9 are conditional follow-on work, not mandatory launch requirements. Phase 7 may follow Phase 5 independently of payments; Phase 8 may be brought forward when measurements justify it. Record any approved reorder and its dependencies before starting that work. Baseline scalability and security requirements apply from the beginning.
 
@@ -567,6 +567,8 @@ When phase work is authorized, append a short record for each phase:
 - Ordering: portfolio/browser verification is deferred for continued development, not passed or removed from release gates. Brave is connected, but page control fails internally before navigation; no browser journey or phone measurement is inferred from HTTP requests.
 - Evidence: the parent-reviewed CLI completed 24 anonymous machine GETs (10 measured plus two warmups per target) at aggregate 1 request/second. All drained HTTP 200 with no transport failures; root measured p95 was 12.25 ms and the unpublished portfolio's unavailable page 263.90 ms. Its 1,543.14 ms warmup is preserved. Seven independent CLI failure-path groups, syntax, targeted lint/format and document checks passed. These tiny local observations justify no scaling change and establish no representative capacity or server-only latency target. No app suite/build rerun for tooling/documentation only.
 - Remaining: representative authenticated workload and agreed dataset, server-only latency/error measurements, browser web vitals/device checks, production connection/storage/cost evidence and any change-specific privacy/outage/retry verification. The tiny synthetic development dataset cannot establish pilot capacity. Phase 8 is not marked complete; deployment, spending and Phase 9 remain deferred.
+- 26 November continuation: the owner requested completing Phase 8 before moving onward. Prepare a disposable, in-memory SQL/RLS diagnostic with the agreed 50/100/500/50/2,000 synthetic dataset and real role-scoped RPC reads/writes. This is a local diagnostic, not ten real sessions, Clerk verification, hosted concurrency, Next server p95 or representative load completion. Docker is unavailable locally. The owner subsequently explicitly deferred the authenticated load test and isolated-target choice until later; record them as unverified release/capacity checks while independent development continues. No load is sent to the preserved DEV project and no service is provisioned.
+- SQL diagnostic milestone, 26 November: [implementation and evidence](docs/phase-8-sql-diagnostic.md) are parent-reviewed. Independent default 5 and maximum 20 sample runs passed 23 checks and seven expected denials each, with exact initial dataset counts, expected committed deltas and zero unexpected errors. Only scripts, npm command and documentation changed; no app/migration/dependency/configuration or hosted state changed. Full app suite/build was not repeated for this tooling milestone. Parent opens a separate PR stacked on #10; owner alone merges. Phase 8 capacity/release verification stays incomplete, and the owner's subsequent Sri Lanka focus decision defers Phase 9.
 
 ## Technical references
 
