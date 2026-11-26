@@ -34,8 +34,8 @@ export async function getCollaboration(id: string) {
   if (!result.data) notFound();
   return { ...result, data: collaborationDetail.parse(result.data) };
 }
-export async function collaborationList(offset = 0) {
-  const result = await collaborationQuery("list", undefined, { offset });
+export async function collaborationList(offset = 0, limit = 20) {
+  const result = await collaborationQuery("list", undefined, { offset, limit });
   return {
     ...result,
     data: z

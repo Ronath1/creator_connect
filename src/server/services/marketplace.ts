@@ -74,8 +74,11 @@ export async function getOpportunities(
       .parse(result.data),
   };
 }
-export async function getApplications(offset: number) {
-  const result = await readMarketplace("applications", undefined, { offset });
+export async function getApplications(offset: number, limit = 20) {
+  const result = await readMarketplace("applications", undefined, {
+    offset,
+    limit,
+  });
   return {
     ...result,
     data: z

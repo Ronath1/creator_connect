@@ -75,6 +75,92 @@ before(async () => {
   }
 });
 after(async () => db?.close());
+
+test("dashboard recent RPC samples cap five with honest all-status totals and ownership isolation", async () => {
+  const recent = [];
+  for (let i = 0; i < 7; i++) recent.push(await active());
+  const requestId = randomUUID();
+  await cmd("creator", "request_cancel", recent[6], {
+    request_id: requestId,
+    reason: "Both participants end this synthetic dashboard fixture.",
+  });
+  await cmd("brand", "respond_cancel", recent[6], {
+    request_id: requestId,
+    decision: "accept",
+  });
+  const own = await rpc("brand", "marketplace_read", {
+    p_kind: "own",
+    p_filters: { limit: 5, offset: 0 },
+  });
+  const opportunityCount = (
+    await db.query(
+      "select count(*)::int total from public.opportunities where brand_id=$1",
+      [ids.brand],
+    )
+  ).rows[0].total;
+  assert.ok(opportunityCount > 5);
+  assert.equal(own.items.length, 5);
+  assert.equal(own.total, opportunityCount);
+  assert.ok(own.items.every((item) => item.brand_id === ids.brand));
+  const apps = await rpc("creator", "marketplace_read", {
+    p_kind: "applications",
+    p_filters: { limit: 5, offset: 0 },
+  });
+  const appCount = (
+    await db.query(
+      "select count(*)::int total from public.applications where influencer_id=$1",
+      [ids.creator],
+    )
+  ).rows[0].total;
+  assert.ok(appCount > 5);
+  assert.equal(apps.items.length, 5);
+  assert.equal(apps.total, appCount);
+  assert.ok(apps.items.every((item) => item.influencer_id === ids.creator));
+  const list = await rpc("brand", "collaboration_read", {
+    p_kind: "list",
+    p_filters: { limit: 5, offset: 0 },
+  });
+  const allowed = (
+    await db.query(
+      "select id from public.collaborations where brand_id=$1 or influencer_id=$1",
+      [ids.brand],
+    )
+  ).rows.map((row) => row.id);
+  assert.ok(allowed.length > 5);
+  assert.equal(list.items.length, 5);
+  assert.equal(list.total, allowed.length);
+  assert.ok(list.items.every((item) => allowed.includes(item.id)));
+  assert.ok(list.items.some((item) => item.status === "cancelled"));
+  const standard = await rpc("brand", "collaboration_read", { p_kind: "list" });
+  assert.equal(standard.items.length, Math.min(20, allowed.length));
+  const emptyId = randomUUID();
+  await db.query(
+    "insert into public.app_users(id,clerk_user_id,role) values($1,'test_dashboard_empty','brand')",
+    [emptyId],
+  );
+  await as("dashboard_empty", (tx) =>
+    tx.query(
+      "select public.complete_brand_onboarding('Empty brand','A complete synthetic brand with no work yet.','Colombo',array['Other'],null)",
+    ),
+  );
+  const empty = await rpc("dashboard_empty", "marketplace_read", {
+    p_kind: "own",
+    p_filters: { limit: 5 },
+  });
+  assert.deepEqual(empty, { items: [], total: 0 });
+  const noPrivate = await rpc("dashboard_empty", "collaboration_read", {
+    p_kind: "list",
+    p_filters: { limit: 5 },
+  });
+  assert.deepEqual(noPrivate, { items: [], total: 0 });
+  await assert.rejects(
+    rpc("other", "marketplace_read", {
+      p_kind: "own",
+      p_filters: { limit: 5 },
+    }),
+    (error) => error.code === "42501",
+  );
+});
 async function as(name, fn, role = "authenticated") {
   return db.transaction(async (tx) => {
     await tx.exec(`set local role ${role}`);
