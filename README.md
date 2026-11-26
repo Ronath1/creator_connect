@@ -65,6 +65,8 @@ Private attachments require the separately configured server-only worker key and
 
 ## Verification and handoff
 
+The [live pilot dashboard](docs/pilot-dashboard.md) shows bounded recent own opportunities/applications and participant collaborations, with honest full-list totals and links. It reuses existing scoped RPCs; admin support, membership/onboarding gates and the nonpayment boundary stay unchanged. Recent samples do not claim to include every active or urgent record.
+
 The [Phase 8 local baseline](docs/phase-8-performance.md) provides `npm run perf:baseline -- --help`: bounded anonymous localhost GET timings, without seeding, credentials or writes. It does not establish server-only p95, browser performance or representative capacity; no Redis/index/cache change is justified by the current tiny development dataset.
 
 The [disposable SQL/RLS diagnostic](docs/phase-8-sql-diagnostic.md), `npm run perf:sql -- --help`, separately seeds the agreed synthetic row counts in an in-memory database and measures bounded public RPC reads/committed writes with access and integrity assertions. It uses test-only role/claims, not real sessions or hosted load, and never touches existing DEV fixtures. Authenticated representative load remains deferred; this is not a capacity pass.

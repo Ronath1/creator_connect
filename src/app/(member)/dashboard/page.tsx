@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { Badge } from "@/components/ui";
 import { getIntegrationConfig } from "@/server/config";
 import { getOwnProfile } from "@/server/services/profile";
+import { DashboardSummary } from "@/components/dashboard-summary";
 
 export const metadata = { title: "Your dashboard" };
 
@@ -25,40 +26,22 @@ export default async function DashboardPage() {
             ? "Discover opportunities that fit your work and keep track of your applications."
             : "Review assigned cases, manage approved membership and record support interventions."}
       </p>
-      <div className="dashboard-empty">
-        <span className="eyebrow">A CLEAR START</span>
-        <h2>
-          {member.role === "admin"
-            ? "Support with a clear record."
-            : "You’re ready for the next step."}
-        </h2>
-        <p>
-          {member.role === "admin"
-            ? "Use the report queue for case-bound private access, membership controls for approved accounts, and audit history to review recorded actions."
-            : "Open your opportunities or applications to discover work, then use Collaborations to confirm terms, discuss evidence and review delivery."}
-        </p>
-        {member.role !== "admin" ? (
-          <Link
-            className="action action-secondary"
-            href={
-              member.role === "brand" ? "/my-opportunities" : "/opportunities"
-            }
-          >
-            {member.role === "brand"
-              ? "Manage opportunities"
-              : "Discover opportunities"}
-          </Link>
-        ) : null}
-        {member.role === "admin" ? (
+      {member.role === "admin" ? (
+        <div className="dashboard-empty">
+          <span className="eyebrow">A CLEAR START</span>
+          <h2>Support with a clear record.</h2>
+          <p>
+            Use the report queue for case-bound private access, membership
+            controls for approved accounts, and audit history to review recorded
+            actions.
+          </p>
           <Link className="action action-primary" href="/admin">
             Open pilot support
           </Link>
-        ) : (
-          <Link className="action action-secondary" href="/collaborations">
-            Your collaborations
-          </Link>
-        )}
-      </div>
+        </div>
+      ) : (
+        <DashboardSummary role={member.role} />
+      )}
       <div className="notice">
         <strong>Payments are not enabled</strong>
         <p>No funds are collected, held, or paid through the pilot.</p>
