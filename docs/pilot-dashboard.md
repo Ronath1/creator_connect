@@ -1,6 +1,6 @@
 # Live private-pilot dashboard
 
-Status: **Implementation independently parent-reviewed, source and native HTTP checks passed, 26 November 2026**. This closes a previously accepted screen-map gap: the [Phase 0 dashboard](../phase-0-pilot-scope.md#3-design-direction-and-screen-outline) called for current opportunities/applications and collaborations, but the implemented page still showed a generic start panel for every user. It does not add growth integrations or change payment/business policy. The Sri Lankan focus and the owner's deployment, provider, authenticated-load, browser/device and Phase 9 deferrals remain in effect.
+Status: **Independently parent-reviewed and delivered in [PR #12](https://github.com/Ronath1/creator_connect/pull/12), source and native HTTP checks passed, 26 November 2026**. This closes a previously accepted screen-map gap: the [Phase 0 dashboard](../phase-0-pilot-scope.md#3-design-direction-and-screen-outline) called for current opportunities/applications and collaborations, but the implemented page still showed a generic start panel for every user. It does not add growth integrations or change payment/business policy. The Sri Lankan focus and the owner's deployment, provider, authenticated-load, browser/device and Phase 9 deferrals remain in effect.
 
 ## Behavior and bounds
 
